@@ -12,5 +12,5 @@
     "PATH_TARGET_TYPESCRIPT_PATH":"D:\\Users\\alv\\Documents\\Data\\ngp\\ngarbi\\src\\app\\svc\\app.tables.ts",
     "PATH_SCHEMA_TEMPLATES":"templates",
     "PATH_SETTINGS": "App_Data",
-    "DATA_API": "http://localhost:6072/api/app"
+    "DATA_API": "http://localhost:16598/api/app"
 }
