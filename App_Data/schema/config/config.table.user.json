@@ -1,0 +1,15 @@
+{
+    "tableName" : "tbl_users",
+    "tableClassFilename":"users",
+    "tableFieldPrefix":"user_",
+    "tableClass":"TblUsers",
+    "tableRowClass":"TblUserRow",
+    "tableLinks":["uprm|uprm_user_id"],
+    "columns": [
+        {"name":"user_id","type":"Int64","keyPosition":0, "isRequired":true},
+        {"name":"user_name","type":"String","uniquePosition":0, "isRequired":true,"sortPosition":0}
+    ],
+    "tableCode":"user",
+    "tableAlias":"",
+    "description":"Collection of users"
+}

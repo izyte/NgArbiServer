@@ -1,0 +1,22 @@
+{
+    "tableName" : "tblLink",
+    "tableFieldPrefix":"lnk_",
+    "tableClassFilename":"test-link",
+    "tableClass":"TblLink",
+    "tableLinks":["lnk_chi_id->chi"],
+    "links":[
+        {
+            "local_field":"lnk_chi_id",
+            "child_code":"chi",
+            "link_type":"1to1"
+        }
+    ],
+    "tableLinksFields":{},
+    "tableRowClass":"TblLinkRow",
+    "columns": [
+        {"name":"lnk_id","type":"Int64","keyPosition":0},
+        {"name":"lnk_par_id","type":"Int64","groupPosition":0}
+    ],
+    "tableCode":"lnk",
+    "description":"Test links table"
+}

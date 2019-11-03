@@ -1,0 +1,12 @@
+{
+    "tableName" : "tblChild",
+    "tableFieldPrefix":"chi_",
+    "tableClassFilename":"test-child",
+    "tableClass":"TblChild",
+    "tableRowClass":"TblChildRow",
+    "columns": [
+        {"name":"chi_id","type":"Int64","keyPosition":0}
+    ],
+    "tableCode":"chi",
+    "description":"Test child table"
+}

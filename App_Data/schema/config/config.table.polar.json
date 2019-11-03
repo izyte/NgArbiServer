@@ -1,0 +1,14 @@
+{
+    "tableName" : "tblPolar",
+    "tableFieldPrefix":"ec_",
+    "tableClassFilename":"polar",
+    "tableClass":"TblPolarReports",
+    "tableRowClass":"TblPolarReportRow",
+    "columns": [
+        {"name":"ec_id","type":"Int64","keyPosition":0},
+        {"name":"ec_customer","type":"String","groupPosition":0}
+    ],
+    "tableCode":"polar",
+    "tableAlias":"",
+    "description":"Collection of polar reports"
+}

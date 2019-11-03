@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_users_params",
+    "tableFieldPrefix":"uprm_",
+    "tableClassFilename":"user-params",
+    "tableClass":"TblUserParams",
+    "tableRowClass":"TblUserParamRow",
+    "columns": [
+        {"name":"uprm_id","type":"Int64","keyPosition":0},
+        {"name":"uprm_user_id","type":"Int64","groupPosition":0,"uniquePosition":0,"sortPosition":0},
+        {"name":"uprm_type_lkp_id","type":"Int64","uniquePosition":1,"sortPosition":1},
+        {"name":"uprm_value_lkp_id","type":"Int64","uniquePosition":2},
+        {"name":"uprm_value_text","type":"String","uniquePosition":3}
+    ],
+    "tableCode":"uprm",
+    "description":"Collection of user parameters"
+}
