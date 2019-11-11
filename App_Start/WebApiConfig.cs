@@ -22,8 +22,13 @@ namespace NgArbi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{table}/{key}/{keyField}",
+                defaults: new
+                {
+                    table = RouteParameter.Optional,
+                    key = RouteParameter.Optional,
+                    keyField = RouteParameter.Optional
+                }
             );
         }
     }

@@ -1,8 +1,0 @@
-{
-    "viewName" : "vw_params_by_user_id",
-    "viewParams": [
-        {"name":"prmUserId","type":"Int64"}
-    ],
-    "viewCode":"prmbyid",
-    "description":"Get user params list by user id"
-}

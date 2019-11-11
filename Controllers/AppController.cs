@@ -11,6 +11,7 @@ using _g = DataAccess.AppGlobals2;
 
 namespace NgArbi.Controllers
 {
+
     public class AppController : ApiController
     {
 
@@ -219,6 +220,9 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> get(string table, string key = "", string keyField = "")
         {
+            // delare final return object collection
+            List<AppReturn> retVal = new List<AppReturn> { };
+
             AppArgs.Add("table", table);
             AppArgs.Add("key", key);
             AppArgs.Add("keyField", keyField);
@@ -233,25 +237,23 @@ namespace NgArbi.Controllers
                 AppDataset.Initialize();
 
                 appReturn.props.Add("Tables", AppDataset.AppTables.Count());
+
+
                 appReturn.props.Add("Views", AppDataset.AppViews.Count());
                 appReturn.props.Add("StoredProcedures", AppDataset.AppProcedures.Count());
 
-                appReturn.returnStrings.Add("Sample");
-                foreach (string s in AppDataset.AppTables["par"].log)
-                {
-                    appReturn.returnStrings.Add(s);
-                }
+                //retVal.Add(appReturn); return retVal;
 
                 return new List<AppReturn> { appReturn };
             }
+
+
 
             if (isAppDebugPaths)
                 return new List<AppReturn> { DebugPath };
 
             // Get collection of recordsets
             List<ReturnObject> ret = AppDataset.AppTables[table].Get(AppArgs);
-            // delare final return object collection
-            List<AppReturn> retVal = new List<AppReturn> { };
             // iterate through the results of table Get method to build the final return collection
             foreach (ReturnObject retObj in ret)
             {

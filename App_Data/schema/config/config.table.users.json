@@ -1,0 +1,26 @@
+{
+    "tableName" : "tbl_Users",
+    "tableFieldPrefix":"user_",
+    "tableClassFilename":"",
+    "tableClass":"TblUsers",
+    "links":[
+        {
+            "foreign_field":"upln_user_id",
+            "child_code":"uplnk",
+            "link_type":"1tom"
+        }
+    ],
+    "tableRowClass":"TblUsersRow",
+    "columns": [
+        {"name":"user_id","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+        "par_code":"Code",
+        "par_desc":"Description",
+        "par_notes":"Parent Notes",
+        "par_lkp_id_a":"User Parameters",
+        "par_lkp_id_b":"Document Type"
+    },
+    "tableCode":"users",
+    "description":"Users collection table"
+}
