@@ -1,0 +1,21 @@
+{
+    "tableName" : "tbl_LinkUserToPlants",
+    "tableFieldPrefix":"upln_",
+    "tableClassFilename":"",
+    "tableClass":"TblUserPlant",
+    "links":[
+        {
+            "foreign_field":"plnt_id",
+            "child_code":"plnt",
+            "link_type":"1to1"
+        }
+    ],
+    "tableRowClass":"TblUserPlantRow",
+    "columns": [
+        {"name":"upln_id","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+    },
+    "tableCode":"upln",
+    "description":"User to plant collection"
+}

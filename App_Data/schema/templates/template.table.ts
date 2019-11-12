@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { TableBase } from '../api/svc/app-common.datatable'; 
 import { TableRowBase }from '../api/svc/app-common.datarow'; 
-import { ColumnInfo } from '../api/svc/app-column.model';
+import { ColumnInfo } from '../api/mod/app-column.model';
 
 //TEMPLATE START
 export class TABLE_CLASS extends TableBase {

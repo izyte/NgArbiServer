@@ -1,0 +1,14 @@
+{
+    "tableName" : "tbl_Plants",
+    "tableFieldPrefix":"plnt_",
+    "tableClassFilename":"",
+    "tableClass":"TblPlants",
+    "tableRowClass":"TblPlantsRow",
+    "columns": [
+        {"name":"plnt_id","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+    },
+    "tableCode":"plnt",
+    "description":"Plants collection table"
+}
