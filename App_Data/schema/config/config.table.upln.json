@@ -5,7 +5,7 @@
     "tableClass":"TblUserPlant",
     "links":[
         {
-            "foreign_field":"plnt_id",
+            "local_field":"upln_plnt_id",
             "child_code":"plnt",
             "link_type":"1to1"
         }

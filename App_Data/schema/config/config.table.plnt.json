@@ -1,5 +1,5 @@
 {
-    "tableName" : "tbl_Plants",
+    "tableName" : "tbl_PlantData",
     "tableFieldPrefix":"plnt_",
     "tableClassFilename":"",
     "tableClass":"TblPlants",

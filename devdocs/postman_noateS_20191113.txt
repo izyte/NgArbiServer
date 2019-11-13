@@ -1,0 +1,59 @@
+Retrieve all records from table with code <table code> and <subscription key>
+http://localhost:6072/api/app/<table code>?skey=<subscription key>
+http://localhost:6072/api/app/par?skey=888777
+
+========================================================
+
+Retrieve all records from table with code <table code>
+http://localhost:6072/api/app/<table code>
+Example 1:retrieve all records from table with code "par"
+http://localhost:6072/api/app/par
+
+===============================================================
+
+Retrieve record with <key field>=<key value> from table with code "par"
+http://localhost:6072/api/app/par/<key value>
+
+Example 1: retrieve record with <key field>=2 from table with code "par"
+http://localhost:6072/api/app/par/2
+
+=======================================================================================
+
+Retrieve records with field at ordinal position <param field> = <param value> from table with code "par"
+http://localhost:6072/api/app/par/<param value>/<param field>
+
+Example 1: retrieve records with field at ordinal position 1 = AGM from table with code "par"
+http://localhost:6072/api/app/par/AGM/1
+
+Example 2: retrieve records with field at ordinal position 4 = true from table with code "par"
+http://localhost:6072/api/app/par/true/4
+
+===================================================================
+Getting group records of a link table plus the child table records
+http://localhost:16598/api/app/<tablecode>/<key value>/<key field>
+
+Example 1: Get link table records where upln_user_id=1 (upln_user_id ordinal position is 1 base 0)
+http://localhost:16598/api/app/upln/1/1
+
+Requirement:
+Link table must have a link definition ...
+"links":[
+		...,
+        {
+            "local_field":"<field in the local table that links to the key field of the child table>",
+            "child_code":"<child table code>",
+            "link_type":"1to1"  // must be set to 1to1 to trigger retrieval of child records together with  
+				// the parent records
+        },
+		...
+    ],
+Example:"links":[
+		...,
+        {
+            "local_field":"upln_plnt_id",
+            "child_code":"plnt",
+            "link_type":"1to1"
+        },
+		...
+    ],
+
