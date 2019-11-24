@@ -3,6 +3,7 @@ import { TableBase } from '../api/svc/app-common.datatable';
 import { TableRowBase }from '../api/svc/app-common.datarow'; 
 import { ColumnInfo } from '../api/mod/app-column.model';
 
+
 //TEMPLATE START
 export class TABLE_CLASS extends TableBase {
 
@@ -10,14 +11,13 @@ export class TABLE_CLASS extends TableBase {
 
   //TABLE_DECLARATIONS
 
-  constructor(public http:HttpClient,public apiUrl:string, public tables?:Array<any>,public parentTable?:any) { 
-    super(http, apiUrl, parentTable); 
+  constructor(public http:HttpClient,public apiUrl:string, public tables?:Array<any>) { 
+    super(http, apiUrl); 
     
     this.derivedTable = this;
 
     //CONSTRUCTOR_CALLS
 
-    if(parentTable!=undefined) parentTable.AddChildTable(this);
     this.InitializeTable();
 
   }
@@ -46,7 +46,7 @@ export class TABLE_ROW_CLASS extends TableRowBase{
   }
 
   // Returs the table object where the row is a member of.
-  public get Table():TABLE_CLASS{ return super._Table(); }
+  public get Table():TABLE_CLASS{ return super.Table; }
 
 //TABLE_ROW_CONSTRUCTOR_CALLS 
 }
