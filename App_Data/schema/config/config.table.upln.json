@@ -12,7 +12,8 @@
     ],
     "tableRowClass":"TblUserPlantRow",
     "columns": [
-        {"name":"upln_id","type":"Int64","keyPosition":0}
+        {"name":"upln_id","type":"Int64","keyPosition":0},
+        {"name":"upln_user_id","type":"Int64","groupPosition":0}
     ],
     "captions":{
     },
