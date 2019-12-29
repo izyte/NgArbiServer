@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_RefMaterials",
+    "tableFieldPrefix":"matl_",
+    "tableClassFilename":"",
+    "tableClass":"TblRefMaterials",
+    "links":[],
+    "tableRowClass":"TblRefMaterialsRow",
+    "columns": [
+        {"name":"matl_id","type":"Int64","keyPosition":0},
+        {"name":"matl_plnt_id","type":"Int64","groupPosition":0}
+    ],
+    "captions":{
+    },
+    "tableCode":"matl",
+    "description":"Materials collection table"
+}

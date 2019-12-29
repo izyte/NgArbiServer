@@ -1,0 +1,248 @@
+
+        public AppReturn xpost([FromBody]JObject values)
+        {
+            _appData = values;
+            AppReturn ret = new AppReturn();
+            ret.commands = AppDataset.BuildCommandParamsListFromData(values, AppArgs);
+            return ret;
+        }
+
+        public AppReturn xpost([FromBody]JObject values, double temp)
+        {
+            AppReturn ret = new AppReturn();
+
+            DALTableLink tableLink = new DALTableLink(
+                _g.TKVStr(values, _g.KEY_TABLE_CODES),
+                AppDataset.AppTables
+            );
+
+            ret.returnStrings.Add("Table Code: " + tableLink.code);
+            ret.returnStrings.Add("Table Key: " + tableLink.key);
+            ret.returnStrings.Add("Has Child : " + tableLink.hasChild);
+            if (tableLink.hasChild)
+            {
+                ret.returnStrings.Add("=> Child table code : " + tableLink.childCode);
+                ret.returnStrings.Add("=> Child parent key : " + tableLink.childParentKey);
+            }
+            ret.returnStrings.Add("===============================================");
+
+            foreach (JProperty jp in (JToken)values)
+            {
+                ret.returnStrings.Add(jp.Name + ": " + jp.Value.Type.ToString());
+                if (jp.Name == "data")
+                {
+                    string datType = jp.Value.Type.ToString();
+                    if (datType == "Array")
+                    {
+                        ret.inputArr = (JArray)jp.Value;
+                    }
+                    else
+                    {
+                        ret.input = (JObject)jp.Value;
+                    }
+                }
+                else if (jp.Name == _g.KEY_TABLE_CODES)
+                {
+
+                }
+            }
+
+            if (ret.inputArr.Count != 0)
+            {
+                // iterate through the elements of the array
+                ret.returnStrings.Add("================================ Data processing ... ================================");
+                foreach (JObject jo in ret.inputArr)
+                {
+                    Int64 parentKey = _g.TKV64(jo, tableLink.key);
+                    ret.returnStrings.Add(tableLink.key + " : " + parentKey);
+                    ret.returnStrings.Add("  parent tokens : " + jo.PropertyValues().Count());
+
+                    string[] action = tableLink.table.GetActionFromData(jo).Split('|');
+
+                    ret.returnStrings.Add("  parent action : " + action[0]);
+
+                    if (action[0] == "insert")
+                    {
+                        jo.Add("oldKey", parentKey);
+                        // set new parent key
+                        parentKey = Convert.ToInt64(action[1]);
+                        jo[tableLink.key] = parentKey;
+                    }
+
+
+
+
+                    if (tableLink.hasChild)
+                    {
+                        if (jo.ContainsKey(tableLink.childCode))
+                        {
+                            // if parent contains a collection of child records
+                            JArray childArr = _g.TKVJArr(jo, tableLink.childCode);
+
+                            // iterate through the child elements
+                            foreach (JObject cJo in childArr)
+                            {
+
+                                string[] childAction = tableLink.childTable.GetActionFromData(cJo).Split('|');
+
+                                Int64 childKey = _g.TKV64(cJo, tableLink.childKey);
+                                ret.returnStrings.Add("  -> " + tableLink.childKey + " : " + childKey);
+
+                                ret.returnStrings.Add("        token count : " + cJo.PropertyValues().Count());
+                                ret.returnStrings.Add("        child action : " + childAction[0]);
+
+                                if (childAction[0] == "insert")
+                                {
+                                    if (cJo.ContainsKey(tableLink.childParentKey))
+                                    {
+                                        // update parent key value
+                                        cJo[tableLink.childParentKey] = parentKey;
+                                    }
+                                    else
+                                    {
+                                        // create new field token
+                                        cJo.Add(tableLink.childParentKey, parentKey);
+                                    }
+
+                                    cJo.Add("oldKey", childKey);
+                                    // set new child key
+                                    childKey = Convert.ToInt64(childAction[1]);
+                                    cJo[tableLink.childKey] = childKey;
+                                }
+
+
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return ret;
+        }
+        public AppReturn xpost([FromBody]JObject values, string second)
+        {
+            // assign values to global private variable to make it available 
+            // for consumption in other method calls (e.g. AppArgs parameter)
+            _appData = values;
+            if (_appData.ContainsKey(_g.KEY_INDICES)) AppArgs.Add(_g.KEY_INDICES, _g.TKVStr(_appData, _g.KEY_INDICES));
+            if (!AppArgs.ContainsKey(_g.KEY_ACTION)) AppArgs.Add(_g.KEY_ACTION, _g.TKVStr(values, _g.KEY_ACTION));
+            AppReturn ret = new AppReturn();
+
+
+            /*
+                Sample update input where key indices is specified:
+                resolved column: uprm_user_id
+                note: in this particular example, uprm_id is not included in the set of
+                      input parameters because it's the unique key field of the table.
+                      This type of input, is used to update multiple records to have
+                      the same set of values for the given list of fields
+                POST: http://localhost:6072/api/app
+                {
+	                "table":"uprm",
+	                "__uid__":"alv",
+	                "__action__":"update",
+	                "__key_indices__":"1",
+	                "data":{
+		                "_newId":-143,
+		                "uprm_user_id":888,
+		                "uprm_type_lkp_id":8003,
+		                "uprm_value_lkp_id":8503,
+		                "uprm_value_text":null
+	                }
+                }
+                
+                Sample update input where default key column(s) is used in where clause:
+                default key: uprm_id
+                POST: http://localhost:6072/api/app
+                {
+	                "table":"uprm",
+	                "__uid__":"alv",
+	                "__action__":"update",
+	                "data":{
+		                "_newId":-143,
+		                "uprm_id":8900,
+		                "uprm_type_lkp_id":8003,
+		                "uprm_value_lkp_id":8503,
+		                "uprm_value_text":"updating parameter record id 8900"
+	                }
+                }             
+
+             */
+
+
+            ret.returnStrings.Add("Update SQL:");
+            ret.input = values;
+
+            // if table code is not specified in the url, it should be specified in the 
+            // input object as "table" root property 
+            string tableCode = _g.TKVStr(values, "table");
+            DALTable tbl = AppDataset.AppTables[tableCode];
+
+            ret.stamps = new DALStamps(tbl.columns, _g.TKVStr(AppArgs, _g.KEY_USER_ID));
+
+            string action = _g.TKVStr(AppArgs, _g.KEY_ACTION);
+            if (action == "") action = "update";
+
+
+            ret.returnStrings.Add(tbl.SQLText(action));
+            //ret.columns = tbl.columns;
+
+            ColumnInfo testColSearch = tbl.columns.Find(c => c.name == "user_id");
+            ret.returnStrings.Add(testColSearch == null ? "Column Not Found" : "Column found!");
+            ret.returnStrings.Add("Table Instantiated: " + tbl.instantiated.ToString());
+            //ret.returnStrings.Add("NewID: " + tbl.NewAutoId.ToString());
+
+            JObject data = _g.TKVJObj(values, "data");
+
+            //ret.inputParams = tbl.BuildCommandParams(_g.TKVJObj(values, "data"),tbl.columns);
+
+            //ret.input = data;
+            //ret.input.Add(tbl.tableFieldPrefix + "updated_by", _g.TKVStr(values, "__uid__"));
+
+            //ret.inputParams = tbl.BuildUpdateParams(data);
+            DALTableFieldParams tblParams =
+                new DALTableFieldParams(
+                    data,
+                    ret.stamps, tbl,
+                    action == "update",
+                    AppArgs.ContainsKey(_g.KEY_INDICES) ?
+                        tbl.ColumnsFromIndices(_g.TKVStr(AppArgs, _g.KEY_INDICES)) : null
+                );
+
+            //ret.inputParams = tblParams.parameters;
+
+            ret.returnStrings.Add("SQL: " + tblParams.SQLText);
+            ret.returnStrings.Add("ColumnIndices: " + tbl.columnsIndex.ContainsKey("stray").ToString());
+            ret.returnStrings.Add("New Temporary Id: " + tblParams.tempNewId);
+
+            int pIdx = 0;
+            Dictionary<string, dynamic> newParams = new Dictionary<string, dynamic>();
+            foreach (KeyValuePair<string, dynamic> vv in tblParams.parameters)
+            {
+                newParams.Add("@p" + pIdx, vv.Value);
+                pIdx++;
+            }
+
+            ReturnObject retObj = DAL.Excute(new CommandParam(tblParams.SQLText, tblParams.parameters));
+
+            ret.inputParams = newParams;
+
+            ret.returnStrings.Add("Error: " + retObj.result.exceptionMessage);
+            ret.returnStrings.Add("Recs: " + retObj.result.affectedRecords);
+
+            return ret;
+
+        }
+        public AppReturn xpost(string table, string key, [FromBody]JObject values, string keyField = "")
+        {
+            AppReturn ret = new AppReturn();
+
+            return ret;
+        }
+        public AppReturn xpost(string table, [FromBody]JObject values)
+        {
+            AppReturn ret = new AppReturn();
+
+            return ret;
+        }

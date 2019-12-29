@@ -46,7 +46,7 @@ export class TABLE_ROW_CLASS extends TableRowBase{
   }
 
   // Returs the table object where the row is a member of.
-  public get Table():TABLE_CLASS{ return super._Table(); }
+  public get Table():TABLE_CLASS{ return super.TableObj; }
 
 //TABLE_ROW_CONSTRUCTOR_CALLS 
 }
