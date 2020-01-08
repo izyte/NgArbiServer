@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_RefCoatExternal",
+    "tableFieldPrefix":"ecot_",
+    "tableClassFilename":"",
+    "tableClass":"TblRefExtCoats",
+    "links":[],
+    "tableRowClass":"TblRefExtCoatsRow",
+    "columns": [
+        {"name":"ecot_id","type":"Int64","keyPosition":0},
+        {"name":"ecot_plnt_id","type":"Int64","groupPosition":0}
+    ],
+    "captions":{
+    },
+    "tableCode":"ecot",
+    "description":"External coatings table"
+}
