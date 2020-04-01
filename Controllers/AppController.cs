@@ -11,8 +11,7 @@ using _g = DataAccess.AppGlobals2;
 
 namespace NgArbi.Controllers
 {
-
-    public class AppController : ApiController
+        public class AppController : ApiController
     {
 
         /**************************************  Private ***************************************/
@@ -255,13 +254,12 @@ namespace NgArbi.Controllers
                 AppDataset.Initialize();
 
                 appReturn.props.Add("Tables", AppDataset.AppTables.Count());
-
+                appReturn.subsKey = "Hello";
 
                 appReturn.props.Add("Views", AppDataset.AppViews.Count());
                 appReturn.props.Add("StoredProcedures", AppDataset.AppProcedures.Count());
 
                 //retVal.Add(appReturn); return retVal;
-
                 return new List<AppReturn> { appReturn };
             }
 

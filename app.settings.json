@@ -8,12 +8,12 @@
     "PATH_SCHEMA":"schema",
     "PATH_SCHEMA_CONFIG":"config",
     "PATH_SCHEMA_CLIENT":"client",
-    "PATH_TARGET_TYPESCRIPT_FOLDER":"d:\\Users\\alv\\Documents\\Data\\ngp\\TestAPI\\src\\app\\services",
-    "PATH_TARGET_TYPESCRIPT_PATH":"D:\\Users\\alv\\Documents\\Data\\ngp\\ngarbi\\src\\app\\svc\\app.tables.ts",
     "TPL_TARGET_TYPESCRIPT_IMPORT":"import { <TABLE>, <TABLEROW> } from './app.tables';",
     "TPL_TARGET_TYPESCRIPT_INSTANCE":"public <TABLEVAR>:<TABLE> = this.AddTable(new <TABLE>(this.http, this.apiUrl, this.tables));",
-    "PATH_TARGET_TYPESCRIPT_DATASET":"D:\\Users\\alv\\Documents\\Data\\ngp\\ngarbi\\src\\app\\svc\\app-dataset.service.ts",
     "PATH_SCHEMA_TEMPLATES":"templates",
     "PATH_SETTINGS": "App_Data",
+    "PATH_TARGET_TYPESCRIPT_FOLDER":"d:\\Users\\alv\\Documents\\Data\\ngp\\TestAPI\\src\\app\\services",
+    "PATH_TARGET_TYPESCRIPT_PATH":"D:\\Users\\alv\\Documents\\Data\\ngp\\ngarbi\\src\\app\\svc\\app.tables.ts",
+    "PATH_TARGET_TYPESCRIPT_DATASET":"D:\\Users\\alv\\Documents\\Data\\ngp\\ngarbi\\src\\app\\svc\\app-dataset.service.ts",
     "DATA_API": "http://localhost:16598/api/app"
 }
