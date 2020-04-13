@@ -1,0 +1,145 @@
+***************************************************************************************************
+Class DALTable
+****************************************************************************************************
+Constructor:
+public DALTable(
+            string tableName = "",
+            List<ColumnInfo> columns = null,
+            string description = "",
+            string tableCode = "",
+            string tableClassFilename = "",
+            string tableClass = "",
+            string tableRowClass = "",
+            string tableFieldPrefix = "",
+            JArray links = null,
+            JObject captions = null,
+            JArray tableLinks = null,
+            JObject tableLinksFields = null,
+            Dictionary<string, DALTable> tableCollection=null,
+            bool isLinkTable = false,
+            bool autoKey = true)
+==========================================================================================================
+Properties:
+==========================================================================================================
+public DateTime instantiated
+public string tableName
+public string tableFieldPrefix
+public string tableClassFilename
+public string tableClass
+public string tableRowClass
+public string tableCode
+public JArray links
+public JObject captions
+public JArray tableLinks
+public JObject tableLinksFields
+
+public string description
+public List<string> log
+public string templateString
+public string templateImports
+
+public string templateClass
+public bool autoKey
+public List<ColumnInfo> columns
+public Dictionary<string,ColumnInfo> columnsIndex
+public Dictionary<string, DALTable> tableCollection
+public List<ColumnInfo> keyCols
+public List<ColumnInfo> sortCols
+public List<ColumnInfo> groupCols
+public List<ColumnInfo> uniqueCols
+public Int64 NewAutoId
+public ColumnInfo keyCol
+public ColumnInfo grpCol
+public bool isDataTable
+public bool isLinkTable
+public string appDataPath
+public string appSchemaFile
+public string appTemplateFile
+
+*public string childSQL
+
+==========================================================================================================
+Methods:
+==========================================================================================================
+private void Initialize()
+private void CollectAllColumns()
+*private void GenerateTypeScriptSchema()
+*private void ExtractActualColumns()
+
+==========================================================================================================
+Functions:
+==========================================================================================================
+public string GetActionFromData(JObject data)
+public bool colExist(string name,Dictionary<string,ColumnInfo> index=null)
+private string MapDataTypeToTS(string dataType)
+private bool isFileExists(string file = "", string path = "")
+public ReturnObject Post(JArray values, JObject args = null)
+public List<ReturnObject> Get(JObject args = null, int objOrder = -1)
+public string SQLText(
+            string mode = "fields",
+            int ctr = 0,
+            List<ColumnInfo> includeColumns = null,
+            List<ColumnInfo> whereColumns = null,
+            List<ColumnInfo> sortColumns = null,
+            bool noCond = false,
+            bool noSort = false,
+            bool byGroup = false,
+            bool fromInsert = false,
+            DALTable parentTable=null,
+            string parentField=null)
+
+public List<ColumnInfo> ColumnsFromIndices(string colIndices)
+public Dictionary<string, dynamic> BuildCommandParamsFromKeys(string keyVals, string keyIndices = "")
+public Dictionary<string, dynamic> BuildCommandParams(JObject args, List<ColumnInfo> cols)
+
+0-public ReturnObjectExternal SQLTest()
+0-public string GetSelectSQL()
+0-private string SQLGet()
+0-public Dictionary<string,dynamic> BuildUpdateParams(JObject values)
+
+
+***************************************************************************************************
+Class DALTableFieldParams
+****************************************************************************************************
+Constructor:
+public DALTableFieldParams(JObject data, 
+            DALStamps stamps,
+            DALTable table,
+            bool isUpdating = true,
+            List<ColumnInfo> keyFields = null)
+
+==========================================================================================================
+Properties:
+==========================================================================================================
+private DALStamps stamps
+private bool isUpdating
+private DALTable table
+public List<ColumnInfo> keyFields
+public string SQLText
+public List<ColumnInfo> columns
+public Dictionary<string, dynamic> parameters
+public Int64 tempNewId
+
+==========================================================================================================
+Methods:
+==========================================================================================================
+
+public void FormatData(JObject data, DALStamps stamps,bool reset = false)
+
+***************************************************************************************************
+Class DALTableLink
+****************************************************************************************************
+Constructor:
+public DALTableLink(string code,Dictionary<string,DALTable> tables,JObject args=null)
+
+==========================================================================================================
+Properties:
+==========================================================================================================
+public string code
+public string key
+public DALStamps stamps
+public DALStamps childStamps
+public DALTable table
+public string childCode
+public string childParentKey
+public bool hasChild
