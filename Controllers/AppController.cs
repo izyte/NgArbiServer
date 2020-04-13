@@ -229,6 +229,7 @@ namespace NgArbi.Controllers
             List<AppReturn> retVal = new List<AppReturn> { };
             foreach(JProperty jp in (JToken)values)
             {
+                // iterate through all tables to get
                 ReturnObject ret = AppDataset.AppTables[jp.Name].Post((JArray)jp.Value);
             }
             return retVal;
