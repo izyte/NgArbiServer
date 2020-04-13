@@ -254,7 +254,7 @@ namespace NgArbi.Controllers
                 AppDataset.Initialize();
 
                 appReturn.props.Add("Tables", AppDataset.AppTables.Count());
-                appReturn.subsKey = "Hello";
+                appReturn.subsKey = "Hello Test Me!";
 
                 appReturn.props.Add("Views", AppDataset.AppViews.Count());
                 appReturn.props.Add("StoredProcedures", AppDataset.AppProcedures.Count());
