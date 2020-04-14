@@ -120,6 +120,11 @@ data-
 sql-
 "update tbl_PlantData set [plnt_name] = @p0, [plnt_desc] = @p1, [plnt_population] = @p2 where [plnt_id] = @p3;"
 params-
+Count = 4
+    [0]: {[@p0, Dev Plant-up]}
+    [1]: {[@p1, This is just a test plant!!!2]}
+    [2]: {[@p2, 85]}
+    [3]: {[@p3, 1]}
 
 
 
