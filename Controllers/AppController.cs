@@ -25,6 +25,8 @@ namespace NgArbi.Controllers
             //AppDataset.GeneralRetObj.debugStrings.Add(_g.AppSetings["PATH_SETTINGS"]);
             //AppDataset.GeneralRetObj.debugStrings.Add("-----------------------------------------");
 
+            //JObject appArgs = AppArgs;
+
         }
 
         public JObject AppArgs
@@ -226,7 +228,14 @@ namespace NgArbi.Controllers
              *  "<tableCode>":[{data row object 1},...,{data row object n}]
              * }
              ************************************************************************************/
-            List<AppReturn> retVal = new List<AppReturn> { };
+
+            //dGhpcyBpcyBhIHRlc3Q=
+            byte[] bytes = Convert.FromBase64String("dGhpcyBpcyBhIHRlc3Q=");
+            string text = System.Text.Encoding.Default.GetString(bytes);
+            byte[] bytes2 = System.Text.Encoding.Default.GetBytes(text);
+            string textB64 = Convert.ToBase64String(bytes2);
+
+            List <AppReturn> retVal = new List<AppReturn> { };
             foreach(JProperty jp in (JToken)values)
             {
                 // iterate through all tables to get
