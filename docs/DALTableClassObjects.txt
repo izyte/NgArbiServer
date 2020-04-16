@@ -214,6 +214,8 @@ private bool isFileExists(string file = "", string path = "")
 public ReturnObject Post(JArray values, JObject args = null)
 public List<ReturnObject> Get(JObject args = null, int objOrder = -1)
 
+public ColumnInfo GetColumnByName(string columnName)
+
 --------------------------------------------------------------------------------------------------------
 public string SQLText(
             string mode = "fields",
@@ -295,3 +297,19 @@ public DALTable table
 public string childCode
 public string childParentKey
 public bool hasChild
+
+
+***************************************************************************************************
+public class DALTableUpdateParams
+***************************************************************************************************
+Constructor:
+public DALTableUpdateParams(DALTable table, JObject data, JObject args = null)
+
+==========================================================================================================
+Properties:
+==========================================================================================================
+public List<ColumnInfo> fieldsToUpdate
+public ColumnInfo keyField
+public ColumnInfo stampField
+public Dictionary<string,dynamic> updateParams
+public List<CommandParam> trackCommandParams

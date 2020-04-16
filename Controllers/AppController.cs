@@ -256,6 +256,8 @@ namespace NgArbi.Controllers
              * Converted to Base64 text
              ************************************************************************************/
 
+            DateTime startProcess = DateTime.Now;
+            
 
             //dGhpcyBpcyBhIHRlc3Q=
             byte[] bytes = Convert.FromBase64String("dGhpcyBpcyBhIHRlc3Q=");
@@ -290,18 +292,36 @@ namespace NgArbi.Controllers
                 if (jp.Name != _g.KEY_REQUEST_HEADER_CODE)
                 {
                     DALTable tbl = AppDataset.AppTables[jp.Name];
+
+                    // get collection of CommandParams
                     List<CommandParam> cmdsTemp = tbl.GetCommandParamsForPosting((JArray)jp.Value, args);
+
                     // append commands
-                    foreach(CommandParam cmd in cmdsTemp)
-                    {
-                        cmds.Add(cmd);
-                    }
+                    foreach(CommandParam cmd in cmdsTemp) cmds.Add(cmd);
                 }
 
                 // execute commands
             }
 
-            DALData.DAL.Excute(cmds, true);
+            string errMessage = DALData.DAL.Excute(cmds, true);
+
+            DateTime endProcess = DateTime.Now;
+
+            AppReturn ret = new AppReturn();
+            long dur = ((endProcess.Millisecond +
+                endProcess.Second * 1000 +
+                endProcess.Minute * 60 * 1000 +
+                endProcess.Hour * 60 * 60 * 1000) - 
+                (startProcess.Millisecond + 
+                startProcess.Second * 1000 + 
+                startProcess.Minute * 60 * 1000 +
+                startProcess.Hour * 60 * 60 * 1000));
+
+            ret.returnStrings.Add(dur.ToString());
+            if(errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
+
+            retVal.Add(ret);
+
             return retVal;
         }
 
