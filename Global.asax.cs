@@ -25,16 +25,17 @@ namespace NgArbi
             /*************************** custom calls ******************************************/
 
             // Initialize data access connection and other properties
-            DAL.connectionString = ConfigurationManager.ConnectionStrings["cnsAppAPI"].ConnectionString;
+            // DAL.connectionString = ConfigurationManager.ConnectionStrings["cnsAppAPI"].ConnectionString;
+            DALData.DAL.connectionString = ConfigurationManager.ConnectionStrings["cnsAppAPI"].ConnectionString;
             DALGlobals.APP_SETTINGS = DataAccess.AppGlobals2.AppSetings;
             DALGlobals.GeneralRetObj = new ReturnObjectExternal();
             AppDataset.configPath = "";
             AppDataset.clientDevPath = "";
 
-            DAL.LogMessage("Application Started ..");
-            DAL.LogMessage("Schema Path: " + DataAccess.AppGlobals2.PATH_SCHEMA_CONFIG);
-            DAL.LogMessage("Client Tables Path: " + DataAccess.AppGlobals2.PATH_TARGET_TYPESCRIPT_PATH);
-            DAL.LogMessage(HttpContext.Current.Server.MapPath("App_Data"));
+            DALData.DAL.LogMessage("Application Started ..");
+            DALData.DAL.LogMessage("Schema Path: " + DataAccess.AppGlobals2.PATH_SCHEMA_CONFIG);
+            DALData.DAL.LogMessage("Client Tables Path: " + DataAccess.AppGlobals2.PATH_TARGET_TYPESCRIPT_PATH);
+            DALData.DAL.LogMessage(HttpContext.Current.Server.MapPath("App_Data"));
 
             // Initialize dataset
             AppDataset.Initialize();

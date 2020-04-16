@@ -248,6 +248,10 @@ namespace NgArbi.Controllers
                     "__rights__":"",
                     "__action__":""
                }
+               "__header__" :{"_req_stamp_":"","__uid__":"alv","__rights__":"","__action__":""}
+
+               https://www.base64encode.org/
+               Equivalent base64: eyJfcmVxX3N0YW1wXyI6IiIsIl9fdWlkX18iOiJhbHYiLCJfX3JpZ2h0c19fIjoiIiwiX19hY3Rpb25fXyI6IiJ9
              *
              * Converted to Base64 text
              ************************************************************************************/
@@ -277,14 +281,27 @@ namespace NgArbi.Controllers
             }
 
             List <AppReturn> retVal = new List<AppReturn> { };
-            foreach(JProperty jp in (JToken)values)
+            List<CommandParam> cmds = new List<CommandParam>();
+
+            foreach (JProperty jp in (JToken)values)
             {
                 // iterate through all tables to get
+                
                 if (jp.Name != _g.KEY_REQUEST_HEADER_CODE)
                 {
-                    ReturnObject ret = AppDataset.AppTables[jp.Name].Post((JArray)jp.Value,args);
+                    DALTable tbl = AppDataset.AppTables[jp.Name];
+                    List<CommandParam> cmdsTemp = tbl.GetCommandParamsForPosting((JArray)jp.Value, args);
+                    // append commands
+                    foreach(CommandParam cmd in cmdsTemp)
+                    {
+                        cmds.Add(cmd);
+                    }
                 }
+
+                // execute commands
             }
+
+            DALData.DAL.Excute(cmds, true);
             return retVal;
         }
 
