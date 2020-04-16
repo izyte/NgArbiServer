@@ -229,17 +229,61 @@ namespace NgArbi.Controllers
              * }
              ************************************************************************************/
 
+            /************************************************************************************
+             * 15 April 2020 - alv
+             * 
+             * public static string KEY_REQUEST_HEADER_CODE = "__header__";
+             * 
+             * public static string KEY_REQUEST_STAMP = "_req_stamp_";
+             * public static string KEY_USER_ID = "__uid__";
+             * public static string KEY_USER_RIGHTS = "__rights__";
+             * public static string KEY_ACTION = "__action__";
+             * 
+             * JSON
+             * 
+               "__header__" :
+               {
+                    "_req_stamp_":"",
+                    "__uid__":"alv",
+                    "__rights__":"",
+                    "__action__":""
+               }
+             *
+             * Converted to Base64 text
+             ************************************************************************************/
+
+
             //dGhpcyBpcyBhIHRlc3Q=
             byte[] bytes = Convert.FromBase64String("dGhpcyBpcyBhIHRlc3Q=");
             string text = System.Text.Encoding.Default.GetString(bytes);
             byte[] bytes2 = System.Text.Encoding.Default.GetBytes(text);
             string textB64 = Convert.ToBase64String(bytes2);
 
+            JObject args = AppArgs;
+
+            if (values.ContainsKey(_g.KEY_REQUEST_HEADER_CODE))
+            {
+                string header = (String)values[_g.KEY_REQUEST_HEADER_CODE];         // extract header Base64
+                byte[] jsonBytes = Convert.FromBase64String(header);                // convert to byte array
+                string jsonText = System.Text.Encoding.Default.GetString(jsonBytes);// convert to JSON string
+                JObject json = JObject.Parse(jsonText);                             // convert to JSON object
+
+                // loop through header information and add token to AppArgs if not yet existing
+                foreach (JProperty jph in (JToken)json)
+                {
+                    if (!args.ContainsKey(jph.Name))
+                        args.Add(jph.Name, jph.Value);
+                }
+            }
+
             List <AppReturn> retVal = new List<AppReturn> { };
             foreach(JProperty jp in (JToken)values)
             {
                 // iterate through all tables to get
-                ReturnObject ret = AppDataset.AppTables[jp.Name].Post((JArray)jp.Value);
+                if (jp.Name != _g.KEY_REQUEST_HEADER_CODE)
+                {
+                    ReturnObject ret = AppDataset.AppTables[jp.Name].Post((JArray)jp.Value,args);
+                }
             }
             return retVal;
         }

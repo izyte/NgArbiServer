@@ -1,0 +1,15 @@
+{
+    "tableName" : "tbl_ChangeTracker",
+    "tableFieldPrefix":"trk_",
+    "tableClassFilename":"",
+    "tableClass":"TblChangeTracker",
+    "links":[],
+    "tableRowClass":"TblChangeTrackerRow",
+    "columns": [
+        {"name":"trk_id","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+    },
+    "tableCode":"chgTrack",
+    "description":"Change tracking collection table"
+}

@@ -5,6 +5,7 @@ App_Start/WebApiConfig/Register:
 config.Routes.MapHttRoute
 	routeTemplate: api/{controller}/{key}/{keyField}
 
+
 api call:
 	<protocol>://<domain>:[port]/<application>/api/<controller>/<table code>/[key value]/[key field index]
 
@@ -42,6 +43,11 @@ sample api call:
 
 
 get:
+http://soga-alv/NgArbi/api/app/@gents
+   if table code is set to @gents, api is instructed to generate TypeScrip files 
+   which serve as equivalent Table Class library that will be used by the client-side
+   angular application
+
 http://soga-alv/NgArbi/api/app/upln/1/2
 
 http://soga-alv/NgArbi/api/app/plnt/1
@@ -148,6 +154,7 @@ public DALTable(
             Dictionary<string, DALTable> tableCollection=null,
             bool isLinkTable = false,
             bool autoKey = true)
+
 ==========================================================================================================
 Properties:
 ==========================================================================================================
@@ -235,6 +242,12 @@ public Dictionary<string, dynamic> BuildCommandParams(JObject args, List<ColumnI
 0-public string GetSelectSQL()
 0-private string SQLGet()
 0-public Dictionary<string,dynamic> BuildUpdateParams(JObject values)
+
+==========================================================================================================
+Special Objects:
+==========================================================================================================
+AppTables[_g.KEY_TABLE_UPDATE_TRACK_CODE] - Referece to ChangeTracking DALTable object
+where _g.KEY_TABLE_UPDATE_TRACK_CODE = "chgTrack"
 
 
 ***************************************************************************************************
