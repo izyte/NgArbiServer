@@ -434,6 +434,48 @@ withFields: true : returns a record in  JSON Object
         "commands": null
     }
 ]
+
+
+Get all records from Anomalies table where anomaly status(col index=4) is open(key value=8450)
+API Call-
+http://soga-alv/NgArbi/api/app/anom/8450/4
+
+[
+    {
+        "returnType": "table",
+        "subsKey": "",
+        "returnCode": "anom",
+        "requestDateTime": "2020-04-17T13:53:13.7180336+08:00",
+        "recordCount": **50**,
+        "records": null,
+        "recordsList": [
+            [
+                995.0,
+                "15-0023",
+                9799.0,
+                22.0,
+                8450.0,
+                "SOGA Tech",
+                "2015-08-06T08:33:23",
+                8471.0,
+                8471.0,
+                "5",
+                null,
+                null,
+                "2016-02-01T10:20:13",
+                null,
+                null,
+                null,
+                null,
+                "2015-08-06T08:33:23",
+                null,
+                0.0,
+                0.0,
+		...
+	   ]
+	}		
+]
+
 post:
 http://soga-alv/NgArbi/api/app
 data-
