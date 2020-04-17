@@ -6,10 +6,9 @@ Table configuration is stored in JSON file located inside the application schema
 
 filnaming convention: config.table.<table code>.json
 
-eg.  <apiFolder>\schema\config\config.table.anom.json
 ```
 
-###### The config file must contain the following
+###### For Anomalies table, the config file must contain the following (<apiFolder>\schema\config\config.table.anom.json)
 ```JSON
 
 {
@@ -28,3 +27,5 @@ eg.  <apiFolder>\schema\config\config.table.anom.json
     "description":"Anomalies Table"
 }
 ```
+
+
