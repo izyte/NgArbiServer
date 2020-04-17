@@ -10,6 +10,7 @@ eg.  <apiFolder>\schema\config\config.table.anom.json
 ```
 
 ```json
+###### The config file should contain the following
 {
     "tableName" : "tbl_Anomalies",
     "tableFieldPrefix":"an_",
