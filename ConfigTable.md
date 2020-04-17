@@ -9,7 +9,7 @@ filnaming convention: config.table.<table code>.json
 eg.  <apiFolder>\schema\config\config.table.anom.json
 ```
 
-###### The config file nust contain the following
+###### The config file must contain the following
 ```JSON
 
 {
