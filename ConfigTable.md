@@ -47,3 +47,4 @@ filenaming convention: config.table.<table code>.json
 ```
 
 
+Open [README.md](https://github.com/izyte/NgArbiServer/README.md)
