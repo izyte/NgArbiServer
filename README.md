@@ -115,7 +115,7 @@ withFields: true : returns a record in  JSON Object
 }
 
 post:
-http://soga-alv/NgArbi/api/app/plnt
+http://soga-alv/NgArbi/api/app
 data-
 {
 	"_requestDate":"2020-04-13T16:42:42.196Z",
