@@ -9,8 +9,9 @@ filnaming convention: config.table.<table code>.json
 eg.  <apiFolder>\schema\config\config.table.anom.json
 ```
 
-```json
-###### The config file should contain the following
+###### The config file nust contain the following
+```JSON
+
 {
     "tableName" : "tbl_Anomalies",
     "tableFieldPrefix":"an_",
