@@ -8,3 +8,5 @@
   3. ` <tableCode>_UpdatedBy ` will store the date/time when the record is updated
   4. ` <tableCode>_UpdatedBy ` will store the login id of the person who updated the record
   
+  
+  Open [README.md](https://github.com/izyte/NgArbiServer/blob/master/README.md)
