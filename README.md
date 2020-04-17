@@ -506,5 +506,13 @@ For table configuration, open [ConfigTable.md](https://github.com/izyte/NgArbiSe
 #### Data Migration
 For data migration instructions, open [DataMigration.md](https://github.com/izyte/NgArbiServer/blob/master/DataMigration.md)
 
+### Recent Updates
+```text
+- ...
+- test table configuration on lookups, anomalies, tree, nodes, users and user params
+- included stamp fields to test tables
+
+```
+
 
 ### Update in progress ...
