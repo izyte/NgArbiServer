@@ -506,6 +506,10 @@ For table configuration, open [ConfigTable.md](https://github.com/izyte/NgArbiSe
 #### Data Migration
 For data migration instructions, open [DataMigration.md](https://github.com/izyte/NgArbiServer/blob/master/DataMigration.md)
 
+#### Change Tracking Sample Records
+
+<img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions">
+
 ### Recent Updates
 ```text
 - ...
