@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_Users",
+    "tableFieldPrefix":"USER_",
+    "tableClassFilename":"",
+    "tableClass":"TblUsers",
+    "links":[],
+    "tableRowClass":"TblUsersRow",
+    "columns": [
+        {"name":"USER_ID","type":"Int64","keyPosition":0},
+		
+    ],
+    "captions":{
+    },
+    "tableCode":"user",
+    "description":"Users Collection Table"
+}

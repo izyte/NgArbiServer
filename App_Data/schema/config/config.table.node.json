@@ -1,0 +1,15 @@
+{
+    "tableName" : "sys_NodesAttrib",
+    "tableFieldPrefix":"NODE_",
+    "tableClassFilename":"",
+    "tableClass":"TblNodesAttrib",
+    "links":[],
+    "tableRowClass":"TblNodesAttribRow",
+    "columns": [
+        {"name":"REC_TAG","type":"Int64","keyPosition":0},
+    ],
+    "captions":{
+    },
+    "tableCode":"node",
+    "description":"Node/Asset Attribute Table"
+}

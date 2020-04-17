@@ -1,0 +1,17 @@
+{
+    "tableName" : "tbl_UserParams",
+    "tableFieldPrefix":"PARAM_",
+    "tableClassFilename":"",
+    "tableClass":"TblUserParam",
+    "links":[],
+    "tableRowClass":"TblUserParamRow",
+    "columns": [
+        {"name":"PARAM_ID","type":"Int64","keyPosition":0},
+        {"name":"PARAM_USER_ID","type":"Int64","groupPosition":0},
+		
+    ],
+    "captions":{
+    },
+    "tableCode":"node",
+    "description":"User Parameters Table"
+}

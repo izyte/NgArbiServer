@@ -1,0 +1,16 @@
+{
+    "tableName" : "sys_Lookups",
+    "tableFieldPrefix":"LKP_",
+    "tableClassFilename":"",
+    "tableClass":"TblLookups",
+    "links":[],
+    "tableRowClass":"TblLookupsRow",
+    "columns": [
+        {"name":"LKP_ID","type":"Int64","keyPosition":0},
+        {"name":"LKP_GRP_ID","type":"Int64","groupPosition":0},
+    ],
+    "captions":{
+    },
+    "tableCode":"lkp",
+    "description":"Composite Lookups Table"
+}
