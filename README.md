@@ -508,7 +508,7 @@ For data migration instructions, open [DataMigration.md](https://github.com/izyt
 
 #### Change Tracking Sample Records
 
-<img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions">
+<img src="https://github.com/izyte/NgArbiServer/blob/master/docs/UpdateTrackingSample.png" title="Sample Change Tracking Data" alt="Tracking Data">
 
 ### Recent Updates
 ```text
