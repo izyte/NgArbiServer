@@ -317,8 +317,8 @@ namespace NgArbi.Controllers
                 startProcess.Minute * 60 * 1000 +
                 startProcess.Hour * 60 * 60 * 1000));
 
-            ret.returnStrings.Add(dur.ToString());
-            if(errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
+            ret.returnStrings.Add("Process Duration in milliseconds: " + dur.ToString() + "(ms)");
+            if (errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
 
             retVal.Add(ret);
 
