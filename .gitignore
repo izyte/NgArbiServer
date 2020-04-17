@@ -245,3 +245,4 @@ ModelManifest.xml
 # exclude App_Data files
 App_Data/*.zip
 App_Data/*.mdb
+!App_Data/IMSA_DATA_NG.zip
