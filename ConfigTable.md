@@ -8,7 +8,7 @@ filnaming convention: config.table.<table code>.json
 
 ```
 
-###### For Anomalies table, the config file must contain the following (<apiFolder>\schema\config\config.table.anom.json)
+###### For Anomalies table, the config file must contain the following `(<apiFolder>\schema\config\config.table.anom.json)`
 ```JSON
 
 {
