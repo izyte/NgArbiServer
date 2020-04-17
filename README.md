@@ -6,3 +6,8 @@ config.Routes.MapHttRoute:
 
 ```
  
+### API Call
+```javascript
+api call:
+	<protocol>://<domain>:[port]/<application>/api/<controller>/<table code>/[key value]/[key field index]
+```
