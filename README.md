@@ -141,4 +141,8 @@ Count = 4
 #### Table configuration
 For table configuration, open [ConfigTable.md](https://github.com/izyte/NgArbiServer/blob/master/ConfigTable.md)
 
+#### Data Migration
+For data migration instructions, open [DataMigration.md](https://github.com/izyte/NgArbiServer/blob/master/DataMigration.md)
+
+
 ### Update in progress ...
