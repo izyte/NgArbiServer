@@ -137,4 +137,8 @@ Count = 4
 
 ```
 
+### Setup
+#### Table configuration
+For table configuration, open [ConfigTable.md](https://github.com/izyte/NgArbiServer/blob/master/ConfigTable.md)
+
 ### Update in progress ...
