@@ -7,14 +7,14 @@ filenaming convention: config.table.<table code>.json
 ```
 ##### Examples:
 ###### For Anomalies table, the config file must contain the following `(<apiFolder>\schema\config\config.table.anom.json)`
-```JSON
+```json
 
 {
     "tableName" : "tbl_Anomalies",
     "tableFieldPrefix":"an_",
     "tableClassFilename":"",
     "tableClass":"TblAnomalies",
-    ```diff -"links":[] ```,
+    "links":[],
     "tableRowClass":"TblAnomaliesRow",
     "columns": [
         {"name":"an_id","type":"Int64","keyPosition":0},
@@ -25,8 +25,22 @@ filenaming convention: config.table.<table code>.json
     "description":"Anomalies Table"
 }
 ```
+##### Setting Links for Anomaly Table
+```json
+{
+    ...,
+    "links":[
+        {},
+        {},
+        {}
+    ]
+    ...
+}
+```
+
+
 ###### For Change Tracking table, the config file must contain the following `(<apiFolder>\schema\config.table.chgTrack.json)`
-```JSON
+```json
 
 {
     "tableName" : "tbl_ChangeTracker",
