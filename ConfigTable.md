@@ -14,7 +14,7 @@ filenaming convention: config.table.<table code>.json
     "tableFieldPrefix":"an_",
     "tableClassFilename":"",
     "tableClass":"TblAnomalies",
-    "links":[],
+    <font style="color:red;">"links":[]</font>,
     "tableRowClass":"TblAnomaliesRow",
     "columns": [
         {"name":"an_id","type":"Int64","keyPosition":0},
