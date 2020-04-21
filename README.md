@@ -44,7 +44,7 @@ Content-Type: applications/json
 				"field2":"updated value 2",
 				"field#":"updated value #",
 			},
-			{ [next record] },
+			{ [next_record] },
 		],
 		"<table code #>":[
 			{ ... },
@@ -81,7 +81,7 @@ Content-Type: applications/json
 					}
 				]
 			},
-			{ [next record] },
+			{ [next_record] },
 		]
 	}	
 ```
