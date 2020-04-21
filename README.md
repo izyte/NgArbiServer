@@ -5,6 +5,25 @@ config.Routes.MapHttRoute:
 	routeTemplate: api/{controller}/{key}/{keyField}
 
 ```
+
+### API Call
+#### GET
+##### Initialize Table Definitions
+```text
+<protocol>://<domain>/[application]/api/app/@gents
+```
+##### Retrieve Records
+```text
+<protocol>://<domain>/[application]/api/app/<table code>/[key value]/[key field index]
+```
+- ```<table code>``` - table code set in the table configuration file.
+
+- ```[key value]``` - long integer representing the value to be searched from the table's unique key field or from the field specified in ```[key field index]``` argument. If this argument is not specified, the request will return all the records found in table.
+
+- ```[key field index]``` - zero-based index which represents the ordinal position a table column where the specified key values will be searched from. Default value of this parameter is the table's key field ordinal position.
+
+
+#### POST
  
 ### API Call
 ```text
