@@ -4,12 +4,16 @@
     "tableClassFilename":"",
     "tableClass":"TblAnomalies",
     "links":[],
+	"relations":[
+		{"foreign_code":"rf", "type":"lnk"},
+		{"foreign_code":"ft", "type":"lnk"}
+	],
     "tableRowClass":"TblAnomaliesRow",
     "columns": [
         {"name":"AN_ID","type":"Int64","keyPosition":0},
     ],
     "captions":{
     },
-    "tableCode":"anom",
+    "tableCode":"an",
     "description":"Anomalies Table"
 }

@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_ReferenceFiles",
+    "tableFieldPrefix":"RF_",
+    "tableClassFilename":"",
+    "tableClass":"TblRefFiles",
+	"tableLinks":[],
+    "links":[],
+    "tableRowClass":"TblRefFilesRow",
+    "columns": [
+        {"name":"RF_ID","type":"Int64","keyPosition":0},
+    ],
+    "captions":{
+    },
+    "tableCode":"rf",
+    "description":"Reference Library Table"
+}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { TableBase } from '../api/svc/app-common.datatable'; 
-import { TableRowBase }from '../api/svc/app-common.datarow'; 
+import { TableBase } from '../api/svc/app-common.datatable';
+import { TableRowBase }from '../api/svc/app-common.datarow';
 import { ColumnInfo } from '../api/mod/app-column.model';
 
 
@@ -11,9 +11,9 @@ export class TABLE_CLASS extends TableBase {
 
   //TABLE_DECLARATIONS
 
-  constructor(public http:HttpClient,public apiUrl:string, public tables?:Array<any>) { 
-    super(http, apiUrl); 
-    
+  constructor(public http:HttpClient,public apiUrl:string, public tables?:Array<any>) {
+    super(http, apiUrl);
+
     this.derivedTable = this;
 
     //CONSTRUCTOR_CALLS
@@ -36,17 +36,17 @@ export class TABLE_CLASS extends TableBase {
   public get dirtyRows():Array<TABLE_ROW_CLASS>{return super.__dirtyRows();}
   public get newRows():Array<TABLE_ROW_CLASS>{return super.__newRows();}
 
-  
+
 }
 
 export class TABLE_ROW_CLASS extends TableRowBase{
 	constructor(TABLE_ROW_PROPERTIES){
     super();
- 
+
   }
 
   // Returs the table object where the row is a member of.
-  public get Table():TABLE_CLASS{ return super.TableObj; }
+  public get Table():TABLE_CLASS{ return super._Table(); }
 
-//TABLE_ROW_CONSTRUCTOR_CALLS 
+//TABLE_ROW_CONSTRUCTOR_CALLS
 }

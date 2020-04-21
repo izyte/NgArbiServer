@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_FailureThreats",
+    "tableFieldPrefix":"FT_",
+    "tableClassFilename":"",
+    "tableClass":"TblFailureThreats",
+    "links":[],
+	"relations":[],
+    "tableRowClass":"TblFailureThreatsRow",
+    "columns": [
+        {"name":"FT_ID","type":"Int64","keyPosition":0},
+    ],
+    "captions":{
+    },
+    "tableCode":"ft",
+    "description":"Failure Threats Table"
+}
