@@ -24,7 +24,69 @@ config.Routes.MapHttRoute:
 
 
 #### POST
- 
+```text
+<protocol>://<domain>/[application]/api/app
+```
+##### Required Header
+```text
+Content-Type: applications/json
+```
+##### Required body
+```json
+	// simple record update
+	{
+		"__header__":"<header code>",
+		"<table code 1>":[
+			{
+				"_requestDate": "yyyy-mm-ddTHH:mm:ss.sssZ",
+				"<keyField>":"<key field>",
+				"field1":"updated value 1",
+				"field2":"updated value 2",
+				"field#":"updated value #",
+			},
+			{ [next record] },
+		],
+		"<table code #>":[
+			{ ... },
+			{ ... }
+		]
+	}
+	
+	// record with linked table update
+	
+	{
+		"__header__":"<header code>",
+		"<table code 1>":[
+			{
+				"_requestDate": "yyyy-mm-ddTHH:mm:ss.sssZ",
+				"<keyField>":"<key field>",
+				"field1":"updated value 1",
+				"field2":"updated value 2",
+				"field#":"updated value #",
+				"__links__":[
+					{
+						"table_code":"<child table code 1>",
+						"action":"<add | remove>",
+						"child_ids":"<null | id1,id2,id3,...,id#>"
+					},
+					{
+						"table_code":"<child table code 2>",
+						"action":"<add | remove>",
+						"child_ids":"<null | id1,id2,id3,...,id#>"
+					},
+					{
+						"table_code":"<child table code #>",
+						"action":"<add | remove>",
+						"child_ids":"<null | id1,id2,id3,...,id#>"
+					}
+				]
+			},
+			{ [next record] },
+		]
+	}	
+```
+
+
 ### API Call
 ```text
 api call:
