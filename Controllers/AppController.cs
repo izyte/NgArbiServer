@@ -287,10 +287,10 @@ namespace NgArbi.Controllers
 
             foreach (JProperty jp in (JToken)values)
             {
-                // iterate through all tables to get
-                
+                // iterate through all tables to generate CommandParams collection
                 if (jp.Name != _g.KEY_REQUEST_HEADER_CODE)
                 {
+                    // get table object from the collection
                     DALTable tbl = AppDataset.AppTables[jp.Name];
 
                     // get collection of CommandParams
