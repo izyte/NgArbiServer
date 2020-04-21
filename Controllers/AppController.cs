@@ -297,10 +297,7 @@ namespace NgArbi.Controllers
                     List<CommandParam> cmdsTemp = tbl.GetCommandParamsForPosting((JArray)jp.Value, args);
 
                     // append commands
-                    foreach (CommandParam cmd in cmdsTemp)
-                    {
-                        cmds.Add(cmd);
-                    }
+                    foreach (CommandParam cmd in cmdsTemp) cmds.Add(cmd);
                 }
 
                 // execute commands
