@@ -293,17 +293,17 @@ namespace NgArbi.Controllers
                     // get table object from the collection
                     DALTable tbl = AppDataset.AppTables[jp.Name];
 
-                    // get collection of CommandParams
+                    // get collection of CommandParams per table
                     List<CommandParam> cmdsTemp = tbl.GetCommandParamsForPosting((JArray)jp.Value, args);
 
-                    // append commands
+                    // append commands to the general collection for execution in bulk
                     foreach (CommandParam cmd in cmdsTemp) cmds.Add(cmd);
                 }
 
                 // execute commands
             }
 
-            // execute commands in the collection
+            // execute all commands in the collection
             string errMessage = DALData.DAL.Excute(cmds, true);
 
             DateTime endProcess = DateTime.Now;
