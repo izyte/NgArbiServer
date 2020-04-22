@@ -91,6 +91,11 @@ Content-Type: applications/json
 {}
 ```
 
+
+### Sample Postman Requests
+#### Refresh table configuration
+
+
 ### API Call
 ```text
 api call:
