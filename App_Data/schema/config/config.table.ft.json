@@ -4,6 +4,8 @@
     "tableClassFilename":"",
     "tableClass":"TblFailureThreats",
     "links":[],
+	"tableDisplayA":"FT_CODE",
+	"tableDisplayB":"FT_NAME",
 	"relations":[],
     "tableRowClass":"TblFailureThreatsRow",
     "columns": [

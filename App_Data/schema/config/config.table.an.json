@@ -3,12 +3,16 @@
     "tableFieldPrefix":"AN_",
     "tableClassFilename":"",
     "tableClass":"TblAnomalies",
+    "tableRowClass":"TblAnomaliesRow",
     "links":[],
+	"tableDisplayA":"AN_REF",
+	"tableDisplayB":"AN_TITLE",
 	"relations":[
 		{"foreign_code":"rf", "type":"lnk"},
-		{"foreign_code":"ft", "type":"lnk"}
+		{"foreign_code":"ft", "type":"lnk"},
+		{"local_field":"AN_STATUS", "foreign_code":"lkp","foreign_field":"LKP_ID","foreign_group":"143", "type":"lkp"},
+		{"local_field":"AN_ASSET_ID", "foreign_code":"node","foreign_field":"REC_TAG", "type":"lkp"}
 	],
-    "tableRowClass":"TblAnomaliesRow",
     "columns": [
         {"name":"AN_ID","type":"Int64","keyPosition":0},
     ],

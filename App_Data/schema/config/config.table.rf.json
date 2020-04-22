@@ -5,6 +5,8 @@
     "tableClass":"TblRefFiles",
 	"tableLinks":[],
     "links":[],
+	"tableDisplayA":"RF_DESC",
+	"tableDisplayB":"",
     "tableRowClass":"TblRefFilesRow",
     "columns": [
         {"name":"RF_ID","type":"Int64","keyPosition":0},

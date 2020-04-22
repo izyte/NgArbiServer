@@ -4,6 +4,8 @@
     "tableClassFilename":"",
     "tableClass":"TblNodesAttrib",
     "links":[],
+	"tableDisplayA":"NODE_ID",
+	"tableDisplayB":"NODE_DESC",
     "tableRowClass":"TblNodesAttribRow",
     "columns": [
         {"name":"REC_TAG","type":"Int64","keyPosition":0},

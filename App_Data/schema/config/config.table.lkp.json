@@ -4,6 +4,8 @@
     "tableClassFilename":"",
     "tableClass":"TblLookups",
     "links":[],
+	"tableDisplayA":"LKP_DESC_A",
+	"tableDisplayB":"LKP_DESC_B",
     "tableRowClass":"TblLookupsRow",
     "columns": [
         {"name":"LKP_ID","type":"Int64","keyPosition":0},
