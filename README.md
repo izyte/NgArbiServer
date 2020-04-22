@@ -95,6 +95,20 @@ Content-Type: applications/json
 ### Sample Postman Requests
 #### Refresh table configuration
 
+<img src="https://github.com/izyte/NgArbiServer/blob/master/docs/postman_gents.png" title="Initialize table configurations" alt="Initialize able config">
+
+#### Get all records from users table
+
+<img src="https://github.com/izyte/NgArbiServer/blob/master/docs/postman_all_users.png" title="Get all records from the users table" alt="Get all records from the users table">
+
+#### Selective updates on users table records
+
+<img src="https://github.com/izyte/NgArbiServer/blob/master/docs/postman_selective_users_updates.png" title="Update selected fields for selected records on users table" alt="Update selected fields for selected records on users table">
+
+#### Updates on reference file linked table to anomaly
+
+<img src="https://github.com/izyte/NgArbiServer/blob/master/docs/postman_linked_table_update.png" title="Update linked reference table entry for anomaly record" alt="Update linked reference table entry for anomaly record">
+
 
 ### API Call
 ```text
