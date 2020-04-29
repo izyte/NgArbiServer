@@ -326,6 +326,14 @@ namespace NgArbi.Controllers
             return retVal;
         }
 
+        public List<AppReturn> nullget(string table, string key = "", string keyField = "")
+        {
+            List<AppReturn> retVal = new List<AppReturn> { };
+            AppReturn ret = new AppReturn();
+            retVal.Add(ret);
+            return retVal;
+        }
+
 
         public List<AppReturn> get(string table, string key = "", string keyField = "")
         {
