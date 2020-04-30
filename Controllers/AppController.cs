@@ -335,14 +335,23 @@ namespace NgArbi.Controllers
         }
 
 
-        public List<AppReturn> get(string table, string key = "", string keyField = "")
+        public List<AppReturn> get(string table, string key = "",
+            string keyField = "", string includedFields = "",
+            string filterExpression = "", string sortFields = "")
+            //string keyField = "")
         {
             // delare final return object collection
             List<AppReturn> retVal = new List<AppReturn> { };
 
+
+            // Add all parameters to the AppArgs object
             AppArgs.Add("table", table);
-            AppArgs.Add("key", key);
-            AppArgs.Add("keyField", keyField);
+            AppArgs.Add("key", (key=="-" ? "" : key));
+            AppArgs.Add("keyField", (keyField == "-" ? "" : keyField));
+            AppArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
+            AppArgs.Add("filterExpression", (filterExpression == "-" ? "" : filterExpression));
+            AppArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
+
 
             if (isAppDebug) return new List<AppReturn> { DebugPath };
 
