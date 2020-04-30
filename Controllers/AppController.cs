@@ -321,6 +321,8 @@ namespace NgArbi.Controllers
             ret.returnStrings.Add("Process Duration in milliseconds: " + dur.ToString() + "(ms)");
             if (errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
 
+            ret.stamps = new DALStamps(cmds[0].table.columns, "@alv");
+
             retVal.Add(ret);
 
             return retVal;
