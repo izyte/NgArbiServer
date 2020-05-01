@@ -262,6 +262,7 @@ namespace NgArbi.Controllers
             //dGhpcyBpcyBhIHRlc3Q=
             byte[] bytes = Convert.FromBase64String("dGhpcyBpcyBhIHRlc3Q=");
             string text = System.Text.Encoding.Default.GetString(bytes);
+
             byte[] bytes2 = System.Text.Encoding.Default.GetBytes(text);
             string textB64 = Convert.ToBase64String(bytes2);
 
@@ -337,13 +338,32 @@ namespace NgArbi.Controllers
         }
 
 
+        public List<AppReturn> ProcessQParam()
+        {
+            List<AppReturn> retVal = new List<AppReturn>();
+
+            AppReturn appReturn = new AppReturn();
+
+            JArray jArray = DALGlobals.btoJA(_g.TKVStr(AppArgs, _g.KEY_QPARAM_JSON));        // if arra
+
+            // process params in jArray
+            foreach(JObject j in jArray)
+            {
+                AppReturn ret = new AppReturn();
+                ret.returnDescription = "Processed in ProcessQParam() Function, Table Code:" + _g.TKVStr(j, "code");
+                retVal.Add(ret);
+            }
+
+            //appReturn.returnDescription = "Processed in ProcessQParam() Function";
+            return retVal;
+        }
+
         public List<AppReturn> get(string table, string key = "",
             string keyField = "", string includedFields = "",
             string filterExpression = "", string sortFields = "")
             //string keyField = "")
         {
             // delare final return object collection
-            List<AppReturn> retVal = new List<AppReturn> { };
 
 
             // Add all parameters to the AppArgs object
@@ -353,6 +373,12 @@ namespace NgArbi.Controllers
             AppArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
             AppArgs.Add("filterExpression", (filterExpression == "-" ? "" : filterExpression));
             AppArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
+
+            // process request where all parameters are embedded in the Base64 querystring parameter "_p"
+            if (AppArgs.ContainsKey(_g.KEY_QPARAM_JSON)) return ProcessQParam();
+
+
+            List<AppReturn> retVal = new List<AppReturn> { };
 
 
             if (isAppDebug) return new List<AppReturn> { DebugPath };
@@ -374,10 +400,15 @@ namespace NgArbi.Controllers
                 return new List<AppReturn> { appReturn };
             }
 
+            if (table == "@mtbl")
+            {
+                // multi table query, accepts json formatted parameters supplied as 
+                // Base64 encoded querystring parameters named ?p=
+                // api call <protocol>://<domain>[/application]/api/app/@mtbl?p=<base64 encoded parameters>
+                return new List<AppReturn> { appReturn };
+            }
 
-
-            if (isAppDebugPaths)
-                return new List<AppReturn> { DebugPath };
+            if (isAppDebugPaths) return new List<AppReturn> { DebugPath };
 
             // Get collection of recordsets
             List<ReturnObject> ret = AppDataset.AppTables[table].Get(AppArgs);
@@ -389,8 +420,9 @@ namespace NgArbi.Controllers
                     // used as handle of list in the client-side data capture reoutine
                     returnCode = retObj.returnCode,
                     returnType = retObj.returnType,
-                    // date and time stamp
-                    requestDateTime = DateTime.Now,
+
+                    // date and time stamp ( by default this parameter is set in the constructor
+                    // requestDateTime = DateTime.Now,
 
                     recordCount = retObj.result.recordCount,
                     records = retObj.result.jsonReturnData,
@@ -409,6 +441,9 @@ namespace NgArbi.Controllers
 
             return retVal;
         }
+
+
+
 
 
 

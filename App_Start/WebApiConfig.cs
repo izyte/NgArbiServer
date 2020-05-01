@@ -23,8 +23,8 @@ namespace NgArbi
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{table}/{key}/{keyField}/{includedFields}/{filterExpression}/{sortFields}",
-                // to skip optional topics/parameters, supply a hyphen (-) character 
-                // eg. skip keyField => ../api/app/<table code>/1/-/1,2,3
+                // to skip optional topics/parameters, supply a plus (+) character 
+                // eg. skip keyField => ../api/app/<table code>/1/+/1,2,3
                 // if supplied value for includedFields is 'df' - display fields, 
                 //   columnInfo of the defined display fields will be resolved in the server
                 // if supplied value for includedFields is comma delimited integers, 
