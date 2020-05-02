@@ -203,12 +203,14 @@ namespace NgArbi.Controllers
 
 
 
-        public AppReturn get()
+        public List<AppReturn> get()
         {
-            if (isAppDebug) return DebugData;
+            bool isWithQParam = AppArgs.ContainsKey(_g.KEY_QPARAM_JSON);
+            if (isWithQParam) return ProcessQParam();
+
+            if (isAppDebug) return new List<AppReturn>() { DebugData };
 
             AppReturn appReturn = new AppReturn();
-
 
             // populate props with AppSettings
             foreach (KeyValuePair<string, dynamic> tk in _g.AppSetings)
@@ -216,7 +218,7 @@ namespace NgArbi.Controllers
                 appReturn.props.Add(tk.Key, tk.Value);
             }
 
-            return appReturn;
+            return new List<AppReturn>() { appReturn };
         }
 
         public List<AppReturn> post([FromBody]JObject values)
@@ -340,21 +342,48 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> ProcessQParam()
         {
-            List<AppReturn> retVal = new List<AppReturn>();
+            AppArgs.Add(_g.KEY_REQ_ARGS_ARR, DALGlobals.btoJA(_g.TKVStr(AppArgs, _g.KEY_QPARAM_JSON)));
+            return ExecuteGetRequest();
+        }
 
-            AppReturn appReturn = new AppReturn();
+        public List<AppReturn> ExecuteGetRequest()
+        {
+            List<AppReturn> retVal = new List<AppReturn> { };
 
-            JArray jArray = DALGlobals.btoJA(_g.TKVStr(AppArgs, _g.KEY_QPARAM_JSON));        // if arra
-
-            // process params in jArray
-            foreach(JObject j in jArray)
+            foreach(JObject jParam in _g.TKVJArr(AppArgs, _g.KEY_REQ_ARGS_ARR))
             {
-                AppReturn ret = new AppReturn();
-                ret.returnDescription = "Processed in ProcessQParam() Function, Table Code:" + _g.TKVStr(j, "code");
-                retVal.Add(ret);
+                string tableCode = _g.TKVStr(jParam, "code");
+                List<ReturnObject> ret = AppDataset.AppTables[tableCode].Get(AppArgs, jParam);
+
+                // iterate through the results of table Get method to build the final return collection
+                foreach (ReturnObject retObj in ret)
+                {
+                    AppReturn appRet = new AppReturn()
+                    {
+                        // used as handle of list in the client-side data capture reoutine
+                        returnCode = retObj.returnCode,
+                        returnType = retObj.returnType,
+
+                        // date and time stamp ( by default this parameter is set in the constructor
+                        // requestDateTime = DateTime.Now,
+
+                        recordCount = retObj.result.recordCount,
+                        records = retObj.result.jsonReturnData,
+                        recordsList = retObj.result.returnData,
+                        recordsProps = retObj.result.recordsProps,
+                        //columns = retObj.result.columns
+                        //columnsArr = retObj.result.jsonReturnData
+                        fieldNames = retObj.result.fieldsNames,
+                        errorMessage = retObj.result.error,
+
+                        subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
+                    };
+
+                    retVal.Add(appRet);
+                }
             }
 
-            //appReturn.returnDescription = "Processed in ProcessQParam() Function";
+
             return retVal;
         }
 
@@ -363,23 +392,11 @@ namespace NgArbi.Controllers
             string filterExpression = "", string sortFields = "")
             //string keyField = "")
         {
-            // delare final return object collection
-
+            // process request where all parameters are embedded in the Base64 querystring parameter "_p"
 
             // Add all parameters to the AppArgs object
-            AppArgs.Add("table", table);
-            AppArgs.Add("key", (key=="-" ? "" : key));
-            AppArgs.Add("keyField", (keyField == "-" ? "" : keyField));
-            AppArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
-            AppArgs.Add("filterExpression", (filterExpression == "-" ? "" : filterExpression));
-            AppArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
-
-            // process request where all parameters are embedded in the Base64 querystring parameter "_p"
-            if (AppArgs.ContainsKey(_g.KEY_QPARAM_JSON)) return ProcessQParam();
-
 
             List<AppReturn> retVal = new List<AppReturn> { };
-
 
             if (isAppDebug) return new List<AppReturn> { DebugPath };
 
@@ -410,36 +427,50 @@ namespace NgArbi.Controllers
 
             if (isAppDebugPaths) return new List<AppReturn> { DebugPath };
 
-            // Get collection of recordsets
-            List<ReturnObject> ret = AppDataset.AppTables[table].Get(AppArgs);
-            // iterate through the results of table Get method to build the final return collection
-            foreach (ReturnObject retObj in ret)
-            {
-                AppReturn appRet = new AppReturn()
-                {
-                    // used as handle of list in the client-side data capture reoutine
-                    returnCode = retObj.returnCode,
-                    returnType = retObj.returnType,
 
-                    // date and time stamp ( by default this parameter is set in the constructor
-                    // requestDateTime = DateTime.Now,
+            JObject jArgs = new JObject() { };
 
-                    recordCount = retObj.result.recordCount,
-                    records = retObj.result.jsonReturnData,
-                    recordsList = retObj.result.returnData,
-                    recordsProps = retObj.result.recordsProps,
-                    //columns = retObj.result.columns
-                    //columnsArr = retObj.result.jsonReturnData
-                    fieldNames = retObj.result.fieldsNames,
-                    errorMessage = retObj.result.error,
+            jArgs.Add("code", table);
+            jArgs.Add("key", (key == "-" ? "" : key));
+            jArgs.Add("keyField", (keyField == "-" ? "" : keyField));
+            jArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
+            jArgs.Add("filterExpression", (filterExpression == "-" ? "" : filterExpression));
+            jArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
 
-                    subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
-                };
+            AppArgs.Add(_g.KEY_REQ_ARGS_ARR, new JArray() { jArgs });
 
-                retVal.Add(appRet);
-            }
+            return ExecuteGetRequest();
 
-            return retVal;
+            //// Get collection of recordsets
+            //List<ReturnObject> ret = AppDataset.AppTables[table].Get(AppArgs);
+            //// iterate through the results of table Get method to build the final return collection
+            //foreach (ReturnObject retObj in ret)
+            //{
+            //    AppReturn appRet = new AppReturn()
+            //    {
+            //        // used as handle of list in the client-side data capture reoutine
+            //        returnCode = retObj.returnCode,
+            //        returnType = retObj.returnType,
+
+            //        // date and time stamp ( by default this parameter is set in the constructor
+            //        // requestDateTime = DateTime.Now,
+
+            //        recordCount = retObj.result.recordCount,
+            //        records = retObj.result.jsonReturnData,
+            //        recordsList = retObj.result.returnData,
+            //        recordsProps = retObj.result.recordsProps,
+            //        //columns = retObj.result.columns
+            //        //columnsArr = retObj.result.jsonReturnData
+            //        fieldNames = retObj.result.fieldsNames,
+            //        errorMessage = retObj.result.error,
+
+            //        subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
+            //    };
+
+            //    retVal.Add(appRet);
+            //}
+
+            // return retVal;
         }
 
 
