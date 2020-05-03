@@ -1,3 +1,4 @@
+import { AppCommonMethodsService } from '../api/svc/app-common-methods.service';
 import { HttpClient } from '@angular/common/http';
 import { TableBase } from '../api/svc/app-common.datatable';
 import { TableRowBase }from '../api/svc/app-common.datarow';
@@ -11,8 +12,8 @@ export class TABLE_CLASS extends TableBase {
 
   //TABLE_DECLARATIONS
 
-  constructor(public http:HttpClient,public apiUrl:string, public tables?:Array<any>) {
-    super(http, apiUrl);
+  constructor(public http:HttpClient,public apiUrl:string, public tables:Array<any>, public apiCommon:AppCommonMethodsService) {
+    super(http, apiUrl,tables,apiCommon);
 
     this.derivedTable = this;
 
