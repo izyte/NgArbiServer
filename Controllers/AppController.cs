@@ -364,17 +364,22 @@ namespace NgArbi.Controllers
                         returnCode = retObj.returnCode,
                         returnType = retObj.returnType,
 
+
                         // date and time stamp ( by default this parameter is set in the constructor
                         // requestDateTime = DateTime.Now,
 
                         recordCount = retObj.result.recordCount,
                         records = retObj.result.jsonReturnData,
+                        returnDataParams = retObj.result.returnDataParams,
                         recordsList = retObj.result.returnData,
                         recordsProps = retObj.result.recordsProps,
                         //columns = retObj.result.columns
                         //columnsArr = retObj.result.jsonReturnData
                         fieldNames = retObj.result.fieldsNames,
                         errorMessage = retObj.result.error,
+
+                        requestDateTime = retObj.result.requestDateTime,
+                        requestDuration = retObj.result.requestDuration,
 
                         subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
                     };
@@ -389,7 +394,7 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> get(string table, string key = "",
             string keyField = "", string includedFields = "",
-            string filterExpression = "", string sortFields = "")
+            string filterExpression = "", string sortFields = "", string pageNumber="0",string pageSize="0")
             //string keyField = "")
         {
             // process request where all parameters are embedded in the Base64 querystring parameter "_p"
@@ -436,6 +441,8 @@ namespace NgArbi.Controllers
             jArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
             jArgs.Add("filterExpression", (filterExpression == "-" ? "" : filterExpression));
             jArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
+            jArgs.Add("pageNumber", (!pageNumber.All(char.IsDigit) ? 0 : Convert.ToInt64(pageNumber)));
+            jArgs.Add("pageSize", (!pageSize.All(char.IsDigit) ? 0 : Convert.ToInt64(pageSize)));
 
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, new JArray() { jArgs });
 

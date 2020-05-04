@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_SurveyPositions",
+    "tableFieldPrefix":"SVY_POS_",
+    "tableClassFilename":"",
+    "tableClass":"TblSurveyPosition",
+    "links":[],
+    "tableRowClass":"TblSurveyPositionRow",
+    "columns": [
+        {"name":"SVY_POS_ID","type":"Int64","keyPosition":0},
+		
+    ],
+    "captions":{
+    },
+    "tableCode":"svypos",
+    "description":"Survey Positions Collection"
+}

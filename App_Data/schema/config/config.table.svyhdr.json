@@ -1,0 +1,16 @@
+{
+    "tableName" : "tbl_SurveyHeader",
+    "tableFieldPrefix":"SVY_HDR_",
+    "tableClassFilename":"",
+    "tableClass":"TblSurveyHeader",
+    "links":[],
+    "tableRowClass":"TblSurveyHeaderRow",
+    "columns": [
+        {"name":"SVY_HDR_ID","type":"Int64","keyPosition":0},
+        {"name":"SVY_HDR_EVT_ID","type":"Int64","groupPosition":0},
+    ],
+    "captions":{
+    },
+    "tableCode":"svyhdr",
+    "description":"Survey Header Collection"
+}
