@@ -364,7 +364,6 @@ namespace NgArbi.Controllers
                         returnCode = retObj.returnCode,
                         returnType = retObj.returnType,
 
-
                         // date and time stamp ( by default this parameter is set in the constructor
                         // requestDateTime = DateTime.Now,
 
