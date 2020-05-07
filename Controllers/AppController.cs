@@ -342,6 +342,7 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> ProcessQParam()
         {
+            // add JArray parameters to AppArgs with key _g.KEY_REQ_ARGS_ARR then process
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, DALGlobals.btoJA(_g.TKVStr(AppArgs, _g.KEY_QPARAM_JSON)));
             return ExecuteGetRequest();
         }
@@ -349,10 +350,27 @@ namespace NgArbi.Controllers
         public List<AppReturn> ExecuteGetRequest()
         {
             List<AppReturn> retVal = new List<AppReturn> { };
+            JObject reqConfig = null;
 
             foreach(JObject jParam in _g.TKVJArr(AppArgs, _g.KEY_REQ_ARGS_ARR))
             {
                 string tableCode = _g.TKVStr(jParam, "code");
+                if (tableCode == null) continue;
+                //http://soga-alv/NgArbi/api/app?_p=W3siY29kZSI6IkBtaXNjIn0seyJjb2RlIjoidXNlciIsInBhZ2VOdW1iZXIiOjEsInBhZ2VTaXplIjozNX1d
+                if (tableCode == "@config")
+                {
+                    // miscellaneous parameters passed from the client
+                    reqConfig = new JObject();
+
+                    AppReturn misc = new AppReturn();
+                    misc.returnType = "config";
+                    misc.subsKey = _g.TKVStr( jParam, "subsKey");
+
+                    retVal.Insert(0, misc);
+                    continue;
+                }
+                
+
                 List<ReturnObject> ret = AppDataset.AppTables[tableCode].Get(AppArgs, jParam);
 
                 // iterate through the results of table Get method to build the final return collection
