@@ -10,7 +10,8 @@
         {"name":"TRE_NOD_TAG_PAR","type":"Int64","groupPosition":0},
     ],
 	"relations":[
-		{"foreign_code":"node", "type":"1to1","local_field":"TRE_DAT_TAG"}
+		{"foreign_code":"node", "type":"1to1","local_field":"TRE_DAT_TAG"},
+		{"foreign_code":"tre", "type":"1tom","foreign_field":"TRE_NOD_TAG_PAR"}
 	],
     "captions":{
     },
