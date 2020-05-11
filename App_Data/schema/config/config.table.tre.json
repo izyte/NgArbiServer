@@ -9,6 +9,9 @@
         {"name":"TRE_NOD_TAG","type":"Int64","keyPosition":0},
         {"name":"TRE_NOD_TAG_PAR","type":"Int64","groupPosition":0},
     ],
+	"relations":[
+		{"foreign_code":"node", "type":"1to1","local_field":"TRE_DAT_TAG"}
+	],
     "captions":{
     },
     "tableCode":"tre",
