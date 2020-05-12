@@ -22,7 +22,7 @@ namespace NgArbi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{table}/{key}/{keyField}/{includedFields}/{filterExpression}/{sortFields}/{pageNumber}/{pageSize}",
+                routeTemplate: "api/{controller}/{table}/{key}/{keyField}/{includedFields}/{filterExpression}/{sortFields}/{pageNumber}/{pageSize}/{requestConfig}",
                 // to skip optional topics/parameters, supply a plus (-) character 
                 // eg. skip keyField => ../api/app/<table code>/1/-/1,2,3
                 // if supplied value for includedFields is 'df' - display fields, 
@@ -38,7 +38,8 @@ namespace NgArbi
                     filterExpression = RouteParameter.Optional,
                     sortFields = RouteParameter.Optional,
                     pageNumber = RouteParameter.Optional,
-                    pageSize = RouteParameter.Optional
+                    pageSize = RouteParameter.Optional,
+                    requestConfig = RouteParameter.Optional
                 }
             );
         }

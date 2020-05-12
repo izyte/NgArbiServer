@@ -411,7 +411,9 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> get(string table, string key = "",
             string keyField = "", string includedFields = "",
-            string filterExpression = "", string sortFields = "", string pageNumber="0",string pageSize="0")
+            string filterExpression = "", string sortFields = "", 
+            string pageNumber="0",string pageSize="0",
+            string requestConfig = "")
             //string keyField = "")
         {
             // process request where all parameters are embedded in the Base64 querystring parameter "_p"
@@ -460,6 +462,7 @@ namespace NgArbi.Controllers
             jArgs.Add("sortFields", (sortFields == "-" ? "" : sortFields));
             jArgs.Add("pageNumber", (!pageNumber.All(char.IsDigit) ? 0 : Convert.ToInt64(pageNumber)));
             jArgs.Add("pageSize", (!pageSize.All(char.IsDigit) ? 0 : Convert.ToInt64(pageSize)));
+            jArgs.Add("requestConfig", (requestConfig == "-" ? "" : requestConfig));
 
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, new JArray() { jArgs });
 
