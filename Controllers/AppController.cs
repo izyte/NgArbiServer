@@ -8,6 +8,7 @@ using System.Web.Http;
 using DataAccess;
 using Newtonsoft.Json.Linq;
 using _g = DataAccess.AppGlobals2;
+using System.Diagnostics;
 
 namespace NgArbi.Controllers
 {
@@ -441,6 +442,22 @@ namespace NgArbi.Controllers
                 return new List<AppReturn> { appReturn };
             }
 
+            if (table == "@locs")
+            {
+                Stopwatch st = new Stopwatch();
+                st.Start();
+                string[] keyArr = key.Split('`');
+                string pCode = "";
+
+                if (keyArr.Length >= 2) pCode = keyArr[1];
+
+                DALData.DAL.BuildNodeLocation(Convert.ToInt32(keyArr[0]),pCode);
+                appReturn.returnCode = table;
+                st.Stop();
+                appReturn.requestDuration = st.ElapsedMilliseconds;
+
+                return new List<AppReturn> { appReturn };
+            }
             if (table == "@mtbl")
             {
                 // multi table query, accepts json formatted parameters supplied as 
