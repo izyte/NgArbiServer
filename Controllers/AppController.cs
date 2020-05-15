@@ -391,9 +391,6 @@ namespace NgArbi.Controllers
                         returnDataParams = retObj.result.returnDataParams,
                         recordsList = retObj.result.returnData,
                         recordsProps = retObj.result.recordsProps,
-
-                        processErrors = retObj.processErrors,
-                        //processLogs = retObj.processLogs,
                         //columns = retObj.result.columns
                         //columnsArr = retObj.result.jsonReturnData
                         fieldNames = retObj.result.fieldsNames,
@@ -441,6 +438,17 @@ namespace NgArbi.Controllers
                 appReturn.props.Add("Views", AppDataset.AppViews.Count());
                 appReturn.props.Add("StoredProcedures", AppDataset.AppProcedures.Count());
 
+                foreach(string tblCode in AppDataset.AppTables.Keys)
+                {
+                    DALTable tbl = AppDataset.AppTables[tblCode];
+                    appReturn.processLogs.Add(tblCode, tbl.tableName);
+                    appReturn.processLogs.Add(tblCode + "_relation", tbl.tableRelations == null ? "0" : tbl.tableRelations.Count.ToString());
+                    foreach(string pv in tbl.tableProcessLogs.Keys)
+                    {
+                        appReturn.processLogs.Add(tblCode + "_proc_" + pv, tbl.tableProcessLogs[pv]);
+                    }
+                }
+
                 //retVal.Add(appReturn); return retVal;
                 return new List<AppReturn> { appReturn };
             }
@@ -485,11 +493,6 @@ namespace NgArbi.Controllers
             jArgs.Add("requestConfig", (requestConfig == "-" ? "" : requestConfig));
 
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, new JArray() { jArgs });
-
-            //AppReturn testAppReturn = new AppReturn();
-            //testAppReturn.returnStrings.Add(_g.TKVStr(jArgs, "requestConfig"));
-
-            //return new List<AppReturn>() { testAppReturn };
 
             return ExecuteGetRequest();
 
