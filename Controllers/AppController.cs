@@ -391,6 +391,9 @@ namespace NgArbi.Controllers
                         returnDataParams = retObj.result.returnDataParams,
                         recordsList = retObj.result.returnData,
                         recordsProps = retObj.result.recordsProps,
+
+                        processErrors = retObj.processErrors,
+                        //processLogs = retObj.processLogs,
                         //columns = retObj.result.columns
                         //columnsArr = retObj.result.jsonReturnData
                         fieldNames = retObj.result.fieldsNames,
@@ -482,6 +485,11 @@ namespace NgArbi.Controllers
             jArgs.Add("requestConfig", (requestConfig == "-" ? "" : requestConfig));
 
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, new JArray() { jArgs });
+
+            //AppReturn testAppReturn = new AppReturn();
+            //testAppReturn.returnStrings.Add(_g.TKVStr(jArgs, "requestConfig"));
+
+            //return new List<AppReturn>() { testAppReturn };
 
             return ExecuteGetRequest();
 

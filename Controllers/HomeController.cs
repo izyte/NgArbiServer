@@ -13,6 +13,7 @@ namespace NgArbi.Controllers
             ViewBag.Title = "Home Page";
 
             return View();
+            //return null;
         }
     }
 }
