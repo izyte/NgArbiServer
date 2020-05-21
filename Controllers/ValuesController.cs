@@ -4,7 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+
 using DataAccess;
+using Newtonsoft.Json.Linq;
+using _g = DataAccess.AppGlobals2;
+using System.Diagnostics;
 
 
 namespace NgArbi.Controllers
@@ -12,12 +16,14 @@ namespace NgArbi.Controllers
     // [Authorize] // commented to bypass authorization
     public class ValuesController : ApiController
     {
+
+
         // GET api/values
         public IEnumerable<string> Get()
         {
             //DALTable tbl = new DALTable();
 
-            return new string[] { "value1", "value2"};
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
@@ -26,9 +32,11 @@ namespace NgArbi.Controllers
             return "value";
         }
 
+        
         // POST api/values
-        public void Post([FromBody]string value)
+        public JObject Post([FromBody]JObject value)
         {
+            return value;
         }
 
         // PUT api/values/5
@@ -40,5 +48,7 @@ namespace NgArbi.Controllers
         public void Delete(int id)
         {
         }
+
+
     }
 }

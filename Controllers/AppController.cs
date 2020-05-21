@@ -289,6 +289,7 @@ namespace NgArbi.Controllers
             List <AppReturn> retVal = new List<AppReturn> { };
             List<CommandParam> cmds = new List<CommandParam>();
 
+            // generate collection of commands to execute
             foreach (JProperty jp in (JToken)values)
             {
                 // iterate through all tables to generate CommandParams collection
@@ -299,6 +300,11 @@ namespace NgArbi.Controllers
 
                     // get collection of CommandParams per table
                     List<CommandParam> cmdsTemp = tbl.GetCommandParamsForPosting((JArray)jp.Value, args);
+                    if(DALData.DAL.globalError.Length != 0)
+                    {
+                        // error has occured, therefore empty list is returned. handle error here
+                        break;
+                    }
 
                     // append commands to the general collection for execution in bulk
                     foreach (CommandParam cmd in cmdsTemp) cmds.Add(cmd);
@@ -308,7 +314,7 @@ namespace NgArbi.Controllers
             }
 
             // execute all commands in the collection
-            string errMessage = DALData.DAL.Excute(cmds, true);
+            List<ReturnObject> cmdResults = DALData.DAL.Excute(cmds, true);
 
             DateTime endProcess = DateTime.Now;
 
@@ -322,17 +328,32 @@ namespace NgArbi.Controllers
                 startProcess.Minute * 60 * 1000 +
                 startProcess.Hour * 60 * 60 * 1000));
 
-            ret.returnStrings.Add("Process Duration in milliseconds: " + dur.ToString() + "(ms)");
-            if (errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
+            //ret.returnStrings.Add("Process Duration in milliseconds: " + dur.ToString() + "(ms)");
+            //if (errMessage.Length!=0) ret.returnStrings.Add("Error:" + errMessage);
 
-            ret.stamps = new DALStamps(cmds[0].table.columns, "@alv");
+            //ret.stamps = new DALStamps(cmds[0].table.columns, "@alv");
+            ret.stamps = null;
 
+            //AppReturn ar = new AppReturn();
+            //ar.stamps = new DALStamps(cmds[0].table.columns, "@alv");
+            //retVal.Add(ar);
+
+            ret.errorMessage = DALData.DAL.globalError;
+            
             retVal.Add(ret);
 
+            foreach (ReturnObject rObj in cmdResults)
+            {
+                ret = new AppReturn();
+                ret.errorMessage = rObj.result.exceptionMessage;
+                retVal.Add(ret);
+            }
+
             return retVal;
+            //return new List<AppReturn> { new AppReturn() };
         }
 
-        public List<AppReturn> nullget(string table, string key = "", string keyField = "")
+        private List<AppReturn> nullget(string table, string key = "", string keyField = "")
         {
             List<AppReturn> retVal = new List<AppReturn> { };
             AppReturn ret = new AppReturn();
@@ -341,14 +362,14 @@ namespace NgArbi.Controllers
         }
 
 
-        public List<AppReturn> ProcessQParam()
+        private List<AppReturn> ProcessQParam()
         {
             // add JArray parameters to AppArgs with key _g.KEY_REQ_ARGS_ARR then process
             AppArgs.Add(_g.KEY_REQ_ARGS_ARR, DALGlobals.btoJA(_g.TKVStr(AppArgs, _g.KEY_QPARAM_JSON)));
             return ExecuteGetRequest();
         }
 
-        public List<AppReturn> ExecuteGetRequest()
+        private List<AppReturn> ExecuteGetRequest()
         {
             List<AppReturn> retVal = new List<AppReturn> { };
             JObject reqConfig = null;
