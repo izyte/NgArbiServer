@@ -13,7 +13,7 @@
     "PATH_SCHEMA_TEMPLATES":"templates",
     "PATH_SETTINGS": "App_Data",
     "PATH_TARGET_TYPESCRIPT_FOLDER":"d:\\Users\\alv\\Documents\\Data\\ngp\\TestAPI\\src\\app\\services",
-    "PATH_TARGET_TYPESCRIPT_PATH":"D:\\Users\\alv\\Documents\\Data\\ngp\\imsa\\src\\app\\svc\\app.tables.ts",
-    "PATH_TARGET_TYPESCRIPT_DATASET":"D:\\Users\\alv\\Documents\\Data\\ngp\\imsa\\src\\app\\svc\\app-dataset.service.ts",
+    "PATH_TARGET_TYPESCRIPT_PATH":"D:\\Users\\alv\\Documents\\Data\\ngp\\ClientSideApp\\src\\app\\svc\\app.tables.ts",
+    "PATH_TARGET_TYPESCRIPT_DATASET":"D:\\Users\\alv\\Documents\\Data\\ngp\\ClientSideApp\\src\\app\\svc\\app-dataset.service.ts",
     "DATA_API": "http://localhost:16598/api/app"
 }

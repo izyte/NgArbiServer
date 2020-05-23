@@ -13,6 +13,10 @@
         {"name":"RF_TYPE","type":"Int64","groupPosition":0},
     ],
     "captions":{
+		"RF_ID":"ID",
+		"RF_TYPE":"Type",
+		"RF_DESC":"Title",
+		"RF_ASSET":"Asset"
     },
     "tableCode":"rf",
     "description":"Reference Library Table"
