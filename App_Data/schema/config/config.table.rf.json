@@ -16,6 +16,7 @@
 		"RF_ID":"ID",
 		"RF_TYPE":"Type",
 		"RF_DESC":"Title",
+		"RF_FILENAME":"Filename",
 		"RF_ASSET":"Asset"
     },
     "tableCode":"rf",
