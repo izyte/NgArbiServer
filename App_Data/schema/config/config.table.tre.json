@@ -12,7 +12,9 @@
 	"relations":[
 		{"foreign_code":"node", "type":"1to1","local_field":"TRE_DAT_TAG"},
 		{"foreign_code":"tre", "type":"1tom","foreign_field":"TRE_NOD_TAG_PAR","parent_detail":true},
-		{"foreign_code":"an", "type":"1tom","local_field":"TRE_DAT_TAG","foreign_field":"AN_ASSET_ID","parent_detail":true}
+		{"foreign_code":"an", "type":"1tom","local_field":"TRE_DAT_TAG","foreign_field":"AN_ASSET_ID","parent_detail":true},
+		{"foreign_code":"rf", "type":"1tom","local_field":"TRE_DAT_TAG","foreign_field":"RF_ASSET","parent_detail":true},
+		{"foreign_code":"svyhdr", "type":"1tom","local_field":"TRE_DAT_TAG","foreign_field":"SVY_HDR_NOD_ID","parent_detail":true}
 	],
     "captions":{
     },
