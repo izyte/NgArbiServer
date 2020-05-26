@@ -37,6 +37,8 @@ namespace NgArbi.Controllers
 
                 if (_appArgs == null)
                 {
+                    // Clear global messages
+                    DALData.DAL.LogGlobalMessage("Clear global messages from AppArgs...", "initClear", true);
                     _appArgs = new JObject();
                 }
                 else
@@ -396,6 +398,7 @@ namespace NgArbi.Controllers
                 List<ReturnObject> ret = AppDataset.AppTables[tableCode].Get(AppArgs, jParam);
 
                 // iterate through the results of table Get method to build the final return collection
+                int retCount = 0;
                 foreach (ReturnObject retObj in ret)
                 {
                     AppReturn appRet = new AppReturn()
@@ -423,6 +426,8 @@ namespace NgArbi.Controllers
                         subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
                     };
 
+                    retCount++;
+                    if (retCount == 1) appRet.globalMesages = DALData.DAL.globalMessages;
                     retVal.Add(appRet);
                 }
             }
@@ -517,36 +522,6 @@ namespace NgArbi.Controllers
 
             return ExecuteGetRequest();
 
-            //// Get collection of recordsets
-            //List<ReturnObject> ret = AppDataset.AppTables[table].Get(AppArgs);
-            //// iterate through the results of table Get method to build the final return collection
-            //foreach (ReturnObject retObj in ret)
-            //{
-            //    AppReturn appRet = new AppReturn()
-            //    {
-            //        // used as handle of list in the client-side data capture reoutine
-            //        returnCode = retObj.returnCode,
-            //        returnType = retObj.returnType,
-
-            //        // date and time stamp ( by default this parameter is set in the constructor
-            //        // requestDateTime = DateTime.Now,
-
-            //        recordCount = retObj.result.recordCount,
-            //        records = retObj.result.jsonReturnData,
-            //        recordsList = retObj.result.returnData,
-            //        recordsProps = retObj.result.recordsProps,
-            //        //columns = retObj.result.columns
-            //        //columnsArr = retObj.result.jsonReturnData
-            //        fieldNames = retObj.result.fieldsNames,
-            //        errorMessage = retObj.result.error,
-
-            //        subsKey = _g.TKVStr(AppArgs, _g.QS_SUBSCRIPTION_KEY),
-            //    };
-
-            //    retVal.Add(appRet);
-            //}
-
-            // return retVal;
         }
 
 

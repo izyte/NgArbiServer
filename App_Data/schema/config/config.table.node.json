@@ -10,6 +10,9 @@
     "columns": [
         {"name":"REC_TAG","type":"Int64","keyPosition":0},
     ],
+	"relations":[
+		{"foreign_code":"an", "type":"1tom","local_field":"REC_TAG","foreign_field":"AN_ASSET_ID","parent_detail":true},
+	],
     "captions":{
     },
     "tableCode":"node",
