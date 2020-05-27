@@ -208,6 +208,7 @@ namespace NgArbi.Controllers
 
         public List<AppReturn> get()
         {
+
             bool isWithQParam = AppArgs.ContainsKey(_g.KEY_QPARAM_JSON);
             if (isWithQParam) return ProcessQParam();
 
