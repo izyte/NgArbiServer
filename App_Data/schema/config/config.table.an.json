@@ -17,6 +17,11 @@
         {"name":"AN_ID","type":"Int64","keyPosition":0},
     ],
     "captions":{
+		"AN_ID":"ID",
+		"AN_DESC":"Title",
+		"AN_ASSET_ID":"Asset",
+		"AN_ORIG_CLASS":"Orig.Class",
+		"AN_CURR_CLASS":"Curr.Class"
     },
     "tableCode":"an",
     "description":"Anomalies Table"
