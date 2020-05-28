@@ -1,0 +1,24 @@
+{
+    "tableName" : "tbl_DesignData",
+    "tableFieldPrefix":"DD_",
+    "tableClassFilename":"",
+    "tableClass":"TblDesignData",
+    "links":[],
+    "tableRowClass":"TblDesignDataRow",
+    "columns": [
+        {"name":"DD_ID","type":"Int64","keyPosition":0},
+        {"name":"DD_ASSET","type":"Int64","groupPosition":0},
+    ],
+    "captions":{
+		"DD_ID":"ID",
+		"DD_ASSET":"Asset",
+		"DD_PARAM":"Type",
+		"DD_ID":"Name",
+		"DD_ID":"Value",
+		"DD_ID":"Unit",
+		"DD_ID":"Notes",
+		"DD_ID":"References"
+    },
+    "tableCode":"desdat",
+    "description":"Design Data Collection"
+}
