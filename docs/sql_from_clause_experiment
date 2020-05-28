@@ -1,0 +1,48 @@
+SELECT desdat.DD_ID, desdat.DD_ASSET, desdat.DD_PARAM, desdat.DD_PARAM_VALUE, desdat.DD_PARAM_UNIT, desdat.DD_PARAM_NOTES, desdat.DD_PARAM_REF
+
+FROM 
+	(
+		(
+			(
+				(tbl_DesignData AS desdat LEFT JOIN tbl_DesignDataParams AS desprm ON desdat.DD_PARAM = desprm.DD_PARAM) 
+					LEFT JOIN sys_Lookups AS lkp_DD_PARAM_UNIT ON desdat.DD_PARAM_UNIT = lkp_DD_PARAM_UNIT.LKP_ID
+			) 
+			LEFT JOIN sys_Lookups AS lkp_DD_PARAM_TYPE ON desprm.DD_PARAM_TYPE = lkp_DD_PARAM_TYPE.LKP_ID
+		) 
+		LEFT JOIN sys_NodesAttrib AS node ON desdat.DD_ASSET = node.REC_TAG
+	) INNER JOIN sys_TreeStruc AS tre ON desdat.DD_ASSET = tre.TRE_DAT_TAG
+
+WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))
+
+ORDER BY lkp_DD_PARAM_TYPE.LKP_DESC_B, lkp_DD_PARAM_UNIT.LKP_DESC_A;
+
+
+desdat|-tre,DD_ASSET,DD_TRE_DAT_TAG;>lkp,DD_PARAM_UNIT;>node,DD_ASSET;>desprm,DD_PARAM>lkp@unit,DD_PARAM_TYPE
+
+FROM 
+(
+	(((tbl_DesignData as desdat INNER JOIN sys_TreeStruc as tre ON desdat.DD_ASSET = tre.TRE_DAT_TAG)
+		LEFT JOIN sys_NodesAttrib AS node ON desdat.DD_ASSET = node.REC_TAG
+	)
+		LEFT JOIN sys_Lookups as unit ON desdat.DD_PARAM_UNIT = unit.LKP_ID
+	)
+	
+		LEFT JOIN tbl_DesignDataParams AS desprm ON desdat.DD_PARAM = desprm.DD_PARAM
+	
+	) LEFT JOIN sys_Lookups as  type ON desprm.DD_PARAM_TYPE = type.LKP_ID
+	
+	
+SELECT desdat.DD_ID, desdat.DD_ASSET, desdat.DD_PARAM, desdat.DD_PARAM_VALUE, desdat.DD_PARAM_UNIT, desdat.DD_PARAM_NOTES, desdat.DD_PARAM_REF
+
+FROM 
+(
+	(((tbl_DesignData as desdat INNER JOIN sys_TreeStruc as tre ON desdat.DD_ASSET = tre.TRE_DAT_TAG)
+		LEFT JOIN sys_NodesAttrib AS node ON desdat.DD_ASSET = node.REC_TAG
+	)
+		LEFT JOIN sys_Lookups as unit ON desdat.DD_PARAM_UNIT = unit.LKP_ID
+	)
+	
+		LEFT JOIN tbl_DesignDataParams AS desprm ON desdat.DD_PARAM = desprm.DD_PARAM
+	
+	) LEFT JOIN sys_Lookups as  type ON desprm.DD_PARAM_TYPE = type.LKP_ID
+WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))

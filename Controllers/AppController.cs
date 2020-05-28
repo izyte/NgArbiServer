@@ -379,8 +379,18 @@ namespace NgArbi.Controllers
 
             foreach(JObject jParam in _g.TKVJArr(AppArgs, _g.KEY_REQ_ARGS_ARR))
             {
-                string tableCode = _g.TKVStr(jParam, "code");
-                if (tableCode == null) continue;
+                string[] tableCodeArr = _g.TKVStr(jParam, "code").Split('|');
+                string tableCode = tableCodeArr[0];
+
+                if (tableCodeArr.Length > 1)
+                {
+                    // table code was supplied with fromClause expression code to be parsed during
+                    // creation of SQL statement.
+                    jParam["code"] = tableCode;
+                    jParam.Add("fromClauseExpr", tableCodeArr[1]);
+                }
+
+                if (tableCode == "") continue;  // table code not found
                 //http://soga-alv/NgArbi/api/app?_p=W3siY29kZSI6IkBtaXNjIn0seyJjb2RlIjoidXNlciIsInBhZ2VOdW1iZXIiOjEsInBhZ2VTaXplIjozNX1d
                 if (tableCode == "@config")
                 {
@@ -392,9 +402,16 @@ namespace NgArbi.Controllers
                     misc.subsKey = _g.TKVStr( jParam, "subsKey");
 
                     retVal.Insert(0, misc);
+
                     continue;
                 }
-                
+
+                //if (tableCodeArr.Length > 1)
+                //{
+                //    // fromClauseExpr is specified, add entry to AppArgs object
+                //    AppArgs.Add("fromClauseExpr", tableCodeArr[1]);
+                //}
+
 
                 List<ReturnObject> ret = AppDataset.AppTables[tableCode].Get(AppArgs, jParam);
 
@@ -508,8 +525,11 @@ namespace NgArbi.Controllers
 
 
             JObject jArgs = new JObject() { };
+            string[] tableArr = table.Split('|');
 
-            jArgs.Add("code", table);
+            jArgs.Add("code", tableArr[0]);
+            if(tableArr.Length>1) jArgs.Add("fromClauseExpr", tableArr[1]);
+            
             jArgs.Add("key", (key == "-" ? "" : key));
             jArgs.Add("keyField", (keyField == "-" ? "" : keyField));
             jArgs.Add("includedFields", (includedFields == "-" ? "" : includedFields));
