@@ -1,0 +1,14 @@
+{
+    "tableName" : "tbl_DesignDataParams",
+    "tableFieldPrefix":"DD_PARAM_",
+    "tableClassFilename":"",
+    "tableClass":"TblDesignDataParams",
+    "links":[],
+    "tableRowClass":"TblDesignDataParamsRow",
+    "columns": [
+        {"name":"DD_PARAM","type":"Int64","keyPosition":0}
+    ],
+    "captions":{},
+    "tableCode":"desprm",
+    "description":"Design Parameter Collection"
+}
