@@ -17,7 +17,18 @@ WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))
 ORDER BY lkp_DD_PARAM_TYPE.LKP_DESC_B, lkp_DD_PARAM_UNIT.LKP_DESC_A;
 
 
-desdat|-tre,DD_ASSET,DD_TRE_DAT_TAG;>lkp,DD_PARAM_UNIT;>node,DD_ASSET;>desprm,DD_PARAM>lkp@unit,DD_PARAM_TYPE
+desdat|-tre,DD_ASSET,DD_TRE_DAT_TAG;>lkp,DD_PARAM_UNIT;>node,DD_ASSET;>desprm,DD_PARAM>lkp@type,DD_PARAM_TYPE
+desdat|
+-tre,DD_ASSET,TRE_DAT_TAG;
+`lkp,DD_PARAM_UNIT;
+`node,DD_ASSET;
+`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;
+
+desdat|
+-tre,DD_ASSET,TRE_DAT_TAG;
+`lnk,DD_PARAM_UNIT;
+`node,DD_ASSET;
+`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;
 
 FROM 
 (
