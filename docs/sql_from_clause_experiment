@@ -28,7 +28,16 @@ desdat|
 -tre,DD_ASSET,TRE_DAT_TAG;
 `lnk,DD_PARAM_UNIT;
 `node,DD_ASSET;
-`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;
+`desprm,DD_PARAM
+	`lkp@type,DD_PARAM_TYPE;
+	
+
+((((( tbl_DesignData as desdat INNER JOIN sys_TreeStruc as tre ON desdat.DD_ASSET = tre.TRE_DAT_TAG ) 
+	LEFT JOIN sys_Lookups as lkp ON desdat.DD_PARAM_UNIT = lkp.LKP_ID ) 
+		LEFT JOIN sys_NodesAttrib as node ON desdat.DD_ASSET = node.REC_TAG ) 
+			LEFT JOIN tbl_DesignDataParams as desprm ON desdat.DD_PARAM = desprm.DD_PARAM ) 
+				LEFT JOIN sys_Lookups as type ON desprm.DD_PARAM_TYPE = type.LKP_ID )	
+	
 
 FROM 
 (
@@ -57,3 +66,8 @@ FROM
 	
 	) LEFT JOIN sys_Lookups as  type ON desprm.DD_PARAM_TYPE = type.LKP_ID
 WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))
+
+
+
+// initial asset fromClause code
+node|-tre,REC_TAG,TRE_DAT_TAG;`an,REC_TAG,AN_ASSET
