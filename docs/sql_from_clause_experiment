@@ -71,3 +71,7 @@ WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))
 
 // initial asset fromClause code
 node|-tre,REC_TAG,TRE_DAT_TAG;`an,REC_TAG,AN_ASSET
+
+// initial design data SQL Parameters
+http://soga-alv/ngarbi/api/app/
+desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UNIT;`node,DD_ASSET;`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE/1/DD_ID
