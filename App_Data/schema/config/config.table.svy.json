@@ -1,0 +1,20 @@
+{
+    "tableName" : "tbl_Surveys",
+    "tableFieldPrefix":"SVY_MAIN_",
+    "tableClassFilename":"",
+    "tableClass":"TblSurvey",
+    "links":[],
+    "tableRowClass":"TblSurveyRow",
+    "columns": [
+        {"name":"SVY_MAIN_ID","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+		"SVY_MAIN_ID":"ID",
+		"SVY_MAIN_TITLE":"Title",
+		"SVY_MAIN_DATE_START":"Start",
+		"SVY_MAIN_DATE_END":"End",
+		"SYV_MAIN_CONTRACTOR":"Contractor"
+    },
+    "tableCode":"svy",
+    "description":"Survey Campaign Collection"
+}

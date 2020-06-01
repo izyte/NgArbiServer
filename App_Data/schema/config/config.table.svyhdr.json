@@ -10,6 +10,10 @@
         {"name":"SVY_HDR_EVT_ID","type":"Int64","groupPosition":0},
     ],
     "captions":{
+		"SVY_HDR_ID":"ID",
+		"SVY_HDR_NOD_ID":"Asset",
+		"SVY_HDR_EVT_ID":"Event Type",
+		"SVY_HDR_EVT_NUM":"Event #"
     },
     "tableCode":"svyhdr",
     "description":"Survey Header Collection"

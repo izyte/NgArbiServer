@@ -73,5 +73,8 @@ WHERE (((tre.TRE_NOD_LOC) ALike "$$%"))
 node|-tre,REC_TAG,TRE_DAT_TAG;`an,REC_TAG,AN_ASSET
 
 // initial design data SQL Parameters
-http://soga-alv/ngarbi/api/app/
-desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UNIT;`node,DD_ASSET;`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE/1/DD_ID
+http://soga-alv/ngarbi/api/app/desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UNIT;`node,DD_ASSET;`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE/1/DD_ID/count(DD_ID)@anom_count`DD_ASSET`DD_PARAM`DD_PARAM_VALUE`DD_PARAM_UNIT`DD_PARAM_NOTES`DD_PARAM_REF
+|
+
+
+http://soga-alv/ngarbi/api/app/desdat/1/DD_ID/count(DD_ID)@anom_count`DD_ASSET`DD_PARAM`DD_PARAM_VALUE`DD_PARAM_UNIT`DD_PARAM_NOTES`DD_PARAM_REF/

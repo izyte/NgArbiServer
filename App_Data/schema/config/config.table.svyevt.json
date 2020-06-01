@@ -1,0 +1,18 @@
+{
+    "tableName" : "tbl_SurveyEvents",
+    "tableFieldPrefix":"SVY_EVT_",
+    "tableClassFilename":"",
+    "tableClass":"TblSurveyEvent",
+    "links":[],
+    "tableRowClass":"TblSurveyEventRow",
+    "columns": [
+        {"name":"SVY_EVT_ID","type":"Int64","keyPosition":0}
+    ],
+    "captions":{
+		"SVY_EVT_ID":"ID",
+		"SVY_EVT_DESC":"Event Type",
+		"SVY_EVT_ACTIVE":"Active"
+    },
+    "tableCode":"svyevt",
+    "description":"Survey Event Types Collection"
+}
