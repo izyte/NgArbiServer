@@ -18,18 +18,15 @@ ORDER BY lkp_DD_PARAM_TYPE.LKP_DESC_B, lkp_DD_PARAM_UNIT.LKP_DESC_A;
 
 
 desdat|-tre,DD_ASSET,DD_TRE_DAT_TAG;>lkp,DD_PARAM_UNIT;>node,DD_ASSET;>desprm,DD_PARAM>lkp@type,DD_PARAM_TYPE
+
 desdat|
 -tre,DD_ASSET,TRE_DAT_TAG;
 `lkp,DD_PARAM_UNIT;
 `node,DD_ASSET;
 `desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;
 
-desdat|
--tre,DD_ASSET,TRE_DAT_TAG;
-`lnk,DD_PARAM_UNIT;
-`node,DD_ASSET;
-`desprm,DD_PARAM
-	`lkp@type,DD_PARAM_TYPE;
+# Select params sample (design data - desdat)
+desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UNIT;`node,DD_ASSET;`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;
 	
 
 ((((( tbl_DesignData as desdat INNER JOIN sys_TreeStruc as tre ON desdat.DD_ASSET = tre.TRE_DAT_TAG ) 
