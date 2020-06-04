@@ -1,3 +1,6 @@
+api params
+api/{controller}/{table}/{key}/{keyField}/{includedFields}/{filterExpression}/{sortFields}/{pageNumber}/{pageSize}/{requestConfig}
+
 SELECT desdat.DD_ID, desdat.DD_ASSET, desdat.DD_PARAM, desdat.DD_PARAM_VALUE, desdat.DD_PARAM_UNIT, desdat.DD_PARAM_NOTES, desdat.DD_PARAM_REF
 
 FROM 
@@ -75,3 +78,6 @@ http://soga-alv/ngarbi/api/app/desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UN
 
 
 http://soga-alv/ngarbi/api/app/desdat/1/DD_ID/count(DD_ID)@anom_count`DD_ASSET`DD_PARAM`DD_PARAM_VALUE`DD_PARAM_UNIT`DD_PARAM_NOTES`DD_PARAM_REF/
+
+# SQL Parameters with WHERE params
+http://soga-alv/ngarbi/api/app/desdat|-tre,DD_ASSET,TRE_DAT_TAG;`lkp,DD_PARAM_UNIT;`node,DD_ASSET;`desprm,DD_PARAM`lkp@type,DD_PARAM_TYPE;/1/-/-/({TRE_NOD_LOC|"$$","$$__"}|{1,2,3,5})^{DD_ASSET|1,2,3,4,5,6}?runMode=debug
